@@ -1,0 +1,50 @@
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'cschlueter/vim-wombat'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'gregsexton/gitv'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'kien/ctrlp.vim'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'mhinz/vim-tmuxify'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'pangloss/vim-javascript'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-characterize'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-sensible'
+Bundle 'tpope/vim-sleuth'
+Bundle 'Valloric/YouCompleteMe'
+
+set visualbell
+set wildignore+=.svn,.git,*.jar,*.class,"target/**"
+
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set nobackup
+set mouse=
+
+nnoremap ' `
+nnoremap ` '
+let mapleader=","
+
+if &term =~ '256color'
+  set t_ut=
+endif
+
+runtime! plugin/sensible.vim
+
+let g:syntastic_java_checkers = []
+let g:syntastic_csslint_options='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
+
+silent! colorscheme wombat256
+set background=dark
