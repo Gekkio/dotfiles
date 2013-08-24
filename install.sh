@@ -46,3 +46,8 @@ link "$HOME/.gvimrc" "$SCRIPT_PATH/vim/gvimrc"
 mkdir -p "$HOME/.xmonad"
 
 link "$HOME/.xmonad/xmonad.hs" "$SCRIPT_PATH/xmonad/xmonad.hs"
+
+# zsh
+
+link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
+link "$HOME/.zshrc" "$SCRIPT_PATH/zshrc"
