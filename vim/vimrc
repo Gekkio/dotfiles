@@ -23,6 +23,7 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-sleuth'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'wting/rust.vim'
 
 set visualbell
 set wildignore+=.svn,.git,*.jar,*.class,"target/**"

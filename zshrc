@@ -40,7 +40,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(ant battery bower cabal colorize command-not-found cp debian git github gnu-utils mvn node npm sbt scala tmux vagrant)
+plugins=(ant battery bower cabal colorize command-not-found cp debian git git-flow github gnu-utils mvn node npm sbt scala tmux vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
