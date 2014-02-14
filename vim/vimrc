@@ -24,6 +24,7 @@ Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-sleuth'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'vim-scripts/gtags.vim'
 Bundle 'wting/rust.vim'
 
 set visualbell
