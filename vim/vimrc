@@ -53,3 +53,7 @@ let g:syntastic_csslint_options='--ignore=ids,overqualified-elements,unique-head
 
 silent! colorscheme wombat256
 set background=dark
+
+if filereadable($HOME.'/.vimrc.local')
+  source $HOME/.vimrc.local
+endif
