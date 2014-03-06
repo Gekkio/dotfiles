@@ -1,36 +1,33 @@
-import Data.Monoid
 import XMonad
-import XMonad.Config.Gnome
-import XMonad.Hooks.FadeInactive
-import XMonad.Hooks.ManageDocks
+import XMonad.Config.Gnome (gnomeConfig)
+import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders (smartBorders)
 
-myModMask :: KeyMask
+myManageHook = composeAll
+  [ transience'
+  , windowTypes
+  , titles
+  ]
+  where windowTypes = composeOne
+          [ isSplash -?> doIgnore
+          , isDialog -?> doCenterFloat
+          ]
+        isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"
+        titles = composeOne
+          [ title =? "Eclipse" -?> doFloat
+          , title =? "Monitor" -?> doFloat
+          ]
+
+myHandleEventHook = fullscreenEventHook
+
 myModMask = mod4Mask
 
-myTerminal :: String
-myTerminal = "gnome-terminal"
-
-manageHooks :: [ManageHook]
-manageHooks = 
-  [ isSplash --> doIgnore
-  , isFullscreen --> doFullFloat
-  , isDialog --> doCenterFloat
-  , title =? "Eclipse" --> doFloat
-  , appName =? "Do" --> doIgnore
-  ]
-  where isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH" 
-
-main :: IO ()
 main =
   xmonad $ gnomeConfig
-      { terminal = myTerminal
-        , modMask = myModMask
-        , manageHook = manageHook gnomeConfig <+> composeAll manageHooks
-        , layoutHook = avoidStruts $ smartBorders $ layoutHook gnomeConfig
-        , startupHook = startupHook gnomeConfig >> setWMName "LG3D"
-        , logHook = fadeInactiveLogHook 0.8
-        , focusFollowsMouse = True
+      { focusFollowsMouse = True
+      , handleEventHook = myHandleEventHook <+> handleEventHook gnomeConfig
+      , layoutHook = smartBorders $ layoutHook gnomeConfig
+      , manageHook = myManageHook <+> manageHook gnomeConfig
+      , modMask = myModMask
       }
