@@ -1,61 +1,108 @@
+" === Vundle initialization ===
+"
+set nocompatible
 filetype off
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" === Plugins ===
+"
+" Wombat color theme
 Bundle 'cschlueter/vim-wombat'
+" Scala editing support
 Bundle 'derekwyatt/vim-scala'
+" Excellent git repository viewer
 Bundle 'gregsexton/gitv'
+" Improved Javascript syntax highlighting
 Bundle 'jelera/vim-javascript-syntax'
+" Fuzzy file searcher. Useful for finding and opening files quickly
 Bundle 'kien/ctrlp.vim'
+" Javascript autocompletion and code analysis. Unpredictable, but useful when
+" it works
 Bundle 'marijnh/tern_for_vim'
+" Tmux integration
 Bundle 'mhinz/vim-tmuxify'
+" Display indentation visually with colors
 Bundle 'nathanaelkane/vim-indent-guides'
+" Improved Javascript editing (e.g. indentation)
 Bundle 'pangloss/vim-javascript'
+" Markdown editing support
 Bundle 'plasticboy/vim-markdown'
+" Automatically add closing delimiter (e.g. '' or <>)
 Bundle 'Raimondi/delimitMate'
+" Integration with The Silver Searcher
 Bundle 'rking/ag.vim'
+" File tree explorer
 Bundle 'scrooloose/nerdtree'
+" Syntax checking for a multitude of languages
 Bundle 'scrooloose/syntastic'
+" Comment out code easily
 Bundle 'tomtom/tcomment_vim'
+" Display character codes in unicode/HTML/etc
 Bundle 'tpope/vim-characterize'
+" Deep git integration with support for most common git commands
 Bundle 'tpope/vim-fugitive'
+" Improved git syntax highlighting and support
 Bundle 'tpope/vim-git'
+" Sensible vim defaults, which enables this vimrc to be fairly short
 Bundle 'tpope/vim-sensible'
+" Figures out and sets indentation settings automatically
 Bundle 'tpope/vim-sleuth'
+" Fairly intuitive key mappings for operation pairs
+" (previous/next, up/down, etc)
 Bundle 'tpope/vim-unimpaired'
+" Much improved auto completion engine
 Bundle 'Valloric/YouCompleteMe'
+" Very useful plugin for doing quick notes
 Bundle 'vimoutliner/vimoutliner'
+" GNU global support
 Bundle 'vim-scripts/gtags.vim'
+" Rust editing support
 Bundle 'wting/rust.vim'
 
+" Blink screen instead of beeping
 set visualbell
-set wildignore+=.svn,.git,*.jar,*.class,"target/**"
+" Ignore certain file patterns. Used by for example ctrl+p
+set wildignore+=.svn,.git,*.o,*.jar,*.class
+" Don't litter the file system with backup files
+set nobackup
+" Disable mouse support. Without this copying from terminal with mouse+ctrlc
+" doesn't work
+set mouse=
 
+" === Indentation ===
+"
+" Default indentation is 2 spaces (but vim-sleuth will handle automatic
+" detection per file)
 set expandtab
 set shiftwidth=2
 set tabstop=2
-set nobackup
-set mouse=
 
+" === Key mappings ===
+"
+" [ and ] are used in some key mappings, but they are awkward with the Finnish
+" keyboard layout. ö and ä are unused, so use them instead. The key position
+" is also consistent with the US layout
 nmap ö [
 nmap ä ]
-nnoremap ' `
-nnoremap ` '
+" mapleader is used in some key mappings. Default is backslash, which is way
+" too awkard with the Finnish keyboard layout
 let mapleader=","
 
-if &term =~ '256color'
-  set t_ut=
-endif
-
-runtime! plugin/sensible.vim
-
+" === Syntastic plugin settings ===
+"
+" Disable annoying java checker which breaks horribly unless you manually
+" configure classpath for every single project
 let g:syntastic_java_checkers = []
+" Disable annoying csslint options which are way too strict
 let g:syntastic_csslint_options='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
 
+" === Colorscheme settings ===
+"
 silent! colorscheme wombat256
 set background=dark
 
+" Include .vimrc.local if it exists
 if filereadable($HOME.'/.vimrc.local')
   source $HOME/.vimrc.local
 endif
