@@ -86,6 +86,20 @@ nmap ä ]
 " too awkard with the Finnish keyboard layout
 let mapleader=","
 
+map <silent> <F2> :NERDTreeToggle<CR>
+map <silent> <S-F2> :NERDTreeMirror<CR>
+
+if $COLORTERM == "gnome-terminal"
+  execute "set <F1>=\eOP"
+  execute "set <F2>=\eOQ"
+  execute "set <F3>=\eOR"
+  execute "set <F4>=\eOS"
+  execute "set <xF1>=\eO1;*P"
+  execute "set <xF2>=\eO1;*Q"
+  execute "set <xF3>=\eO1;*R"
+  execute "set <xF4>=\eO1;*S"
+endif
+
 " === Syntastic plugin settings ===
 "
 " Disable annoying java checker which breaks horribly unless you manually
