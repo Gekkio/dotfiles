@@ -66,6 +66,8 @@ set visualbell
 set wildignore+=.svn,.git,*.o,*.jar,*.class
 " Don't litter the file system with backup files
 set nobackup
+" Enable mouse support
+set mouse=a
 
 " === Indentation ===
 "
@@ -86,9 +88,11 @@ nmap ä ]
 " too awkard with the Finnish keyboard layout
 let mapleader=","
 
+" Mappings for NERD tree plugin
 map <silent> <F2> :NERDTreeToggle<CR>
 map <silent> <S-F2> :NERDTreeMirror<CR>
 
+" Fix F1-F4 mappings in gnome-terminal
 if $COLORTERM == "gnome-terminal"
   execute "set <F1>=\eOP"
   execute "set <F2>=\eOQ"
