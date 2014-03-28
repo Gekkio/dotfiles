@@ -66,9 +66,6 @@ set visualbell
 set wildignore+=.svn,.git,*.o,*.jar,*.class
 " Don't litter the file system with backup files
 set nobackup
-" Disable mouse support. Without this copying from terminal with mouse+ctrlc
-" doesn't work
-set mouse=
 
 " === Indentation ===
 "
