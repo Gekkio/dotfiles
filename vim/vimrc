@@ -9,8 +9,14 @@ call vundle#rc()
 "
 " Wombat color theme
 Bundle 'cschlueter/vim-wombat'
+" Improved Haskell support
+Bundle 'dag/vim2hs'
 " Scala editing support
 Bundle 'derekwyatt/vim-scala'
+" Haskell ghc-mod integration
+Bundle 'eagletmt/ghcmod-vim'
+" Haskell completion
+Bundle 'eagletmt/neco-ghc'
 " Excellent git repository viewer
 Bundle 'gregsexton/gitv'
 " Improved Javascript syntax highlighting
@@ -36,6 +42,8 @@ Bundle 'rking/ag.vim'
 Bundle 'scrooloose/nerdtree'
 " Syntax checking for a multitude of languages
 Bundle 'scrooloose/syntastic'
+" Needed for some other plugins
+Bundle 'Shougo/vimproc.vim'
 " Comment out code easily
 Bundle 'tomtom/tcomment_vim'
 " Display character codes in unicode/HTML/etc
