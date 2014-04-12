@@ -120,6 +120,14 @@ let g:syntastic_java_checkers = []
 " Disable annoying csslint options which are way too strict
 let g:syntastic_csslint_options='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
 
+" === neco-ghc plugin settings ===
+"
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" === YouCompleteMe plugin settings ===
+"
+let g:ycm_semantic_triggers = {'haskell': ['.']}
+
 " === Indent Guides plugin settings ===
 "
 let g:indent_guides_guide_size=1
