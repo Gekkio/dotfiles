@@ -17,6 +17,8 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'eagletmt/ghcmod-vim'
 " Haskell completion
 Bundle 'eagletmt/neco-ghc'
+" Vundle itself
+Bundle 'gmarik/vundle'
 " Excellent git repository viewer
 Bundle 'gregsexton/gitv'
 " Improved Javascript syntax highlighting
@@ -67,6 +69,8 @@ Bundle 'vimoutliner/vimoutliner'
 Bundle 'vim-scripts/gtags.vim'
 " Rust editing support
 Bundle 'wting/rust.vim'
+
+filetype plugin indent on
 
 " Blink screen instead of beeping
 set visualbell
