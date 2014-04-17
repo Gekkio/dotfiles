@@ -32,12 +32,9 @@ link "$HOME/.tmux.conf" "$SCRIPT_PATH/tmux.conf"
 
 # vim
 
-mkdir -p "$HOME/.local/share/vim/backup"
-mkdir -p "$HOME/.local/share/vim/swap"
-mkdir -p "$HOME/.local/share/vim/undo"
 mkdir -p "$HOME/.vim/bundle"
 
-link "$HOME/.vimrc" "$SCRIPT_PATH//vim/vimrc"
+link "$HOME/.vimrc" "$SCRIPT_PATH/vim/vimrc"
 link "$HOME/.gvimrc" "$SCRIPT_PATH/vim/gvimrc"
 
 # vim vundle
