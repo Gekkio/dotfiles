@@ -37,9 +37,17 @@ mkdir -p "$HOME/.local/share/vim/swap"
 mkdir -p "$HOME/.local/share/vim/undo"
 mkdir -p "$HOME/.vim/bundle"
 
-link "$HOME/.vim/bundle/vundle" "$SCRIPT_PATH/vim/bundle/vundle"
 link "$HOME/.vimrc" "$SCRIPT_PATH//vim/vimrc"
 link "$HOME/.gvimrc" "$SCRIPT_PATH/vim/gvimrc"
+
+# vim vundle
+if [ ! -e "$HOME/.vim/bundle/vundle" ]; then
+  if [ ! `which git` ]; then
+    echo git must be installed!
+    exit 1
+  fi
+  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/vundle
+fi
 
 # xmonad
 
