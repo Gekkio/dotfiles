@@ -44,4 +44,6 @@ plugins=(ant battery bower cabal colorize command-not-found cp git git-flow gith
 
 source $ZSH/oh-my-zsh.sh
 
+[[ -f "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"
+
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

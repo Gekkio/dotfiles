@@ -11,6 +11,8 @@ call vundle#rc()
 Bundle 'cschlueter/vim-wombat'
 " Improved Haskell support
 Bundle 'dag/vim2hs'
+" Ocaml indentation
+Bundle 'def-lkb/ocp-indent-vim'
 " Scala editing support
 Bundle 'derekwyatt/vim-scala'
 " Haskell ghc-mod integration
@@ -154,6 +156,15 @@ else
     colorscheme wombat
   catch E185
   endtry
+endif
+
+" === Ocaml Merlin support ===
+"
+if executable('ocamlmerlin') && executable('opam')
+  let s:ocamlmerlin = substitute(system('opam config var share'), '\n$', '', '''') . "/ocamlmerlin"
+  execute "set rtp+=".s:ocamlmerlin."/vim"
+
+  let g:syntastic_ocaml_checkers=['merlin']
 endif
 
 " Include .vimrc.local if it exists
