@@ -2,76 +2,77 @@
 "
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " === Plugins ===
 "
 " Wombat color theme
-Bundle 'cschlueter/vim-wombat'
+Plugin 'cschlueter/vim-wombat'
 " Improved Haskell support
-Bundle 'dag/vim2hs'
+Plugin 'dag/vim2hs'
 " Ocaml indentation
-Bundle 'def-lkb/ocp-indent-vim'
+Plugin 'def-lkb/ocp-indent-vim'
 " Scala editing support
-Bundle 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-scala'
 " Haskell ghc-mod integration
-Bundle 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/ghcmod-vim'
 " Haskell completion
-Bundle 'eagletmt/neco-ghc'
+Plugin 'eagletmt/neco-ghc'
 " Vundle itself
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 " Excellent git repository viewer
-Bundle 'gregsexton/gitv'
+Plugin 'gregsexton/gitv'
 " Improved Javascript syntax highlighting
-Bundle 'jelera/vim-javascript-syntax'
+Plugin 'jelera/vim-javascript-syntax'
 " Fuzzy file searcher. Useful for finding and opening files quickly
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 " Javascript autocompletion and code analysis. Unpredictable, but useful when
 " it works
-Bundle 'marijnh/tern_for_vim'
+Plugin 'marijnh/tern_for_vim'
 " Tmux integration
-Bundle 'mhinz/vim-tmuxify'
+Plugin 'mhinz/vim-tmuxify'
 " Display indentation visually with colors
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 " Improved Javascript editing (e.g. indentation)
-Bundle 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 " Markdown editing support
-Bundle 'plasticboy/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 " Automatically add closing delimiter (e.g. '' or <>)
-Bundle 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 " Integration with The Silver Searcher
-Bundle 'rking/ag.vim'
+Plugin 'rking/ag.vim'
 " File tree explorer
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " Syntax checking for a multitude of languages
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " Needed for some other plugins
-Bundle 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim'
 " Comment out code easily
-Bundle 'tomtom/tcomment_vim'
+Plugin 'tomtom/tcomment_vim'
 " Display character codes in unicode/HTML/etc
-Bundle 'tpope/vim-characterize'
+Plugin 'tpope/vim-characterize'
 " Deep git integration with support for most common git commands
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Improved git syntax highlighting and support
-Bundle 'tpope/vim-git'
+Plugin 'tpope/vim-git'
 " Sensible vim defaults, which enables this vimrc to be fairly short
-Bundle 'tpope/vim-sensible'
+Plugin 'tpope/vim-sensible'
 " Figures out and sets indentation settings automatically
-Bundle 'tpope/vim-sleuth'
+Plugin 'tpope/vim-sleuth'
 " Fairly intuitive key mappings for operation pairs
 " (previous/next, up/down, etc)
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 " Much improved auto completion engine
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 " Very useful plugin for doing quick notes
-Bundle 'vimoutliner/vimoutliner'
+Plugin 'vimoutliner/vimoutliner'
 " GNU global support
-Bundle 'vim-scripts/gtags.vim'
+Plugin 'vim-scripts/gtags.vim'
 " Rust editing support
-Bundle 'wting/rust.vim'
+Plugin 'wting/rust.vim'
 
+call vundle#end()
 filetype plugin indent on
 
 " Blink screen instead of beeping

@@ -38,12 +38,12 @@ link "$HOME/.vimrc" "$SCRIPT_PATH/vim/vimrc"
 link "$HOME/.gvimrc" "$SCRIPT_PATH/vim/gvimrc"
 
 # vim vundle
-if [ ! -e "$HOME/.vim/bundle/vundle" ]; then
+if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
   if [ ! `which git` ]; then
     echo git must be installed!
     exit 1
   fi
-  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/vundle
+  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
 # xmonad
