@@ -12,6 +12,7 @@ myManageHook = composeAll
   ]
   where windowTypes = composeOne
           [ isSplash -?> doIgnore
+          , isFullscreen -?> doFullFloat
           , isDialog -?> doCenterFloat
           ]
         isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"
