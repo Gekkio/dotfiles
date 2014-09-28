@@ -9,6 +9,7 @@ typeset -U path
 
 pathdirs=(
   "$HOME/.cabal/bin"
+  "$HOME/.gem/ruby/1.9.1/bin"
   "$HOME/.local/bin"
   "$HOME/bin"
 )
