@@ -19,7 +19,7 @@ pathdirs=(
   "$HOME/.cabal/bin"
   "$HOME/.gem/ruby/1.9.1/bin"
   "$HOME/bin/symlinks/android-sdk/tools"
-  "$HOME/bin/symlinks/android-sdk/tools/platform-tools"
+  "$HOME/bin/symlinks/android-sdk/platform-tools"
   "$HOME/bin/symlinks/android-ndk"
   "$HOME/.local/bin"
   "$HOME/bin"
