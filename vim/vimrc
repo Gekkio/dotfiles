@@ -119,6 +119,11 @@ if $COLORTERM == "gnome-terminal"
   execute "set <xF4>=\eO1;*S"
 endif
 
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
 " === Syntastic plugin settings ===
 "
 " Disable annoying java checker which breaks horribly unless you manually
