@@ -101,6 +101,9 @@ set tabstop=2
 " is also consistent with the US layout
 nmap ö [
 nmap ä ]
+nmap Ö {
+nmap Ä }
+
 " mapleader is used in some key mappings. Default is backslash, which is way
 " too awkard with the Finnish keyboard layout
 let mapleader=","
