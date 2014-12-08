@@ -138,7 +138,7 @@ let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
 let g:syntastic_java_checkers = []
 let g:syntastic_asm_checkers = []
 " Disable annoying csslint options which are way too strict
-let g:syntastic_csslint_options='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
+let g:syntastic_css_csslint_args='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
 
 " === neco-ghc plugin settings ===
 "
