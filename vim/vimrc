@@ -155,6 +155,7 @@ let g:indent_guides_start_level=2
 
 " === Colorscheme settings ===
 "
+set background=dark
 if &t_Co == 256
   try
     colorscheme wombat256
