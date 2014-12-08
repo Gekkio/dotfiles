@@ -129,6 +129,8 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
+
 " === Syntastic plugin settings ===
 "
 " Disable annoying java checker which breaks horribly unless you manually
