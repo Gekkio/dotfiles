@@ -2,7 +2,7 @@ export DEBEMAIL="joonas.javanainen@gmail.com"
 export DEBFULLNAME="Joonas Javanainen"
 
 if [[ "$COLORTERM" = "gnome-terminal" ]] && [[ "$TERM" = "xterm" ]]; then
-  export TERM=gnome-256color
+  export TERM=xterm-256color
 fi
 
 if [[ -h "$HOME/bin/symlinks/android-sdk" ]]; then
