@@ -29,6 +29,8 @@ Plugin 'gregsexton/gitv'
 Plugin 'jelera/vim-javascript-syntax'
 " Fuzzy file searcher. Useful for finding and opening files quickly
 Plugin 'kien/ctrlp.vim'
+" Typescript support
+Plugin 'leafgarland/typescript-vim'
 " Javascript autocompletion and code analysis. Unpredictable, but useful when
 " it works
 Plugin 'marijnh/tern_for_vim'
