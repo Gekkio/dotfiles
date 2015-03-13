@@ -155,6 +155,8 @@ let g:ycm_semantic_triggers = {'haskell': ['.']}
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 
+let omni_sql_no_default_maps=1
+
 " === Colorscheme settings ===
 "
 set background=dark
