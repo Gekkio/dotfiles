@@ -10,7 +10,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Unified tmux/vim navigation
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 " Wombat color theme
 Plugin 'cschlueter/vim-wombat'
 " Improved Haskell support
