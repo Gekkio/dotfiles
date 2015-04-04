@@ -31,9 +31,6 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'kien/ctrlp.vim'
 " Typescript support
 Plugin 'leafgarland/typescript-vim'
-" Javascript autocompletion and code analysis. Unpredictable, but useful when
-" it works
-Plugin 'marijnh/tern_for_vim'
 " Tmux integration
 Plugin 'mhinz/vim-tmuxify'
 " Display indentation visually with colors
