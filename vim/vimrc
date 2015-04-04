@@ -43,6 +43,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'Raimondi/delimitMate'
 " Integration with The Silver Searcher
 Plugin 'rking/ag.vim'
+" Rust editing support
+Plugin 'rust-lang/rust.vim'
 " File tree explorer
 Plugin 'scrooloose/nerdtree'
 " Syntax checking for a multitude of languages
@@ -70,8 +72,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vimoutliner/vimoutliner'
 " GNU global support
 Plugin 'vim-scripts/gtags.vim'
-" Rust editing support
-Plugin 'wting/rust.vim'
 
 call vundle#end()
 filetype plugin indent on
