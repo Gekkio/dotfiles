@@ -6,7 +6,9 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " === Plugins ===
-"
+
+Plugin 'gmarik/Vundle.vim'
+
 " Unified tmux/vim navigation
 Bundle 'christoomey/vim-tmux-navigator'
 " Wombat color theme
@@ -21,8 +23,6 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'eagletmt/ghcmod-vim'
 " Haskell completion
 Plugin 'eagletmt/neco-ghc'
-" Vundle itself
-Plugin 'gmarik/vundle'
 " Excellent git repository viewer
 Plugin 'gregsexton/gitv'
 " Improved Javascript syntax highlighting
