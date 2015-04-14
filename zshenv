@@ -13,9 +13,12 @@ if [[ -h "$HOME/bin/symlinks/android-ndk" ]]; then
   export ANDROID_NDK_HOME=$HOME/bin/symlinks/android-ndk
 fi
 
+export NODE_PATH="$HOME/.npm-packages/lib/node_modules:$NODE_PATH"
+
 typeset -U path
 
 pathdirs=(
+  "$HOME/.npm-packages/bin"
   "$HOME/.cabal/bin"
   "$HOME/.gem/ruby/1.9.1/bin"
   "$HOME/bin/symlinks/android-sdk/tools"

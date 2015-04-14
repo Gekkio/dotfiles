@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 if [ ! `which realpath` ]; then
   echo realpath must be installed!
   exit 1
@@ -25,6 +27,13 @@ link() {
     fi
   fi
 }
+
+# npm
+
+mkdir -p "$HOME/.npm-packages"
+if [ ! -e "$HOME/.npmrc" ]; then
+  echo "prefix = $HOME/.npm-packages" > "$HOME/.npmrc"
+fi
 
 # tmux
 
