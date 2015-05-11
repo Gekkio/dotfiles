@@ -129,6 +129,7 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
+let g:tmuxify_global_maps = 1
 
 " === Syntastic plugin settings ===
 "
