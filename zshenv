@@ -1,7 +1,7 @@
 export DEBEMAIL="joonas.javanainen@gmail.com"
 export DEBFULLNAME="Joonas Javanainen"
 
-if [[ "$COLORTERM" = "gnome-terminal" ]] && [[ "$TERM" = "xterm" ]]; then
+if [[ "$COLORTERM" = "gnome-terminal" ]] || [[ ${$(</proc/$PPID/cmdline):t} == gnome-terminal* ]]; then
   export TERM=xterm-256color
 fi
 
