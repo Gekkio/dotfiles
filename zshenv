@@ -1,7 +1,7 @@
 export DEBEMAIL="joonas.javanainen@gmail.com"
 export DEBFULLNAME="Joonas Javanainen"
 
-whence vim &> /dev/null && export EDITOR="vim"
+whence vim &> /dev/null && export EDITOR="vim"; export VISUAL="vim"
 
 if [[ "$COLORTERM" = "gnome-terminal" ]] || [[ ${$(</proc/$PPID/cmdline):t} == gnome-terminal* ]]; then
   export TERM=xterm-256color
