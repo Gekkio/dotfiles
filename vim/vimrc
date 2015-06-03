@@ -13,6 +13,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 " Wombat color theme
 Plugin 'cschlueter/vim-wombat'
+" Fuzzy file searcher. Useful for finding and opening files quickly
+Plugin 'ctrlpvim/ctrlp.vim'
 " Improved Haskell support
 Plugin 'dag/vim2hs'
 " Ocaml indentation
@@ -27,8 +29,6 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'gregsexton/gitv'
 " Improved Javascript syntax highlighting
 Plugin 'jelera/vim-javascript-syntax'
-" Fuzzy file searcher. Useful for finding and opening files quickly
-Plugin 'kien/ctrlp.vim'
 " Typescript support
 Plugin 'leafgarland/typescript-vim'
 " Tmux integration
