@@ -27,6 +27,8 @@ Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
 " Excellent git repository viewer
 Plugin 'gregsexton/gitv'
+" Snippets
+Plugin 'honza/vim-snippets'
 " Improved Javascript syntax highlighting
 Plugin 'jelera/vim-javascript-syntax'
 " Typescript support
@@ -49,6 +51,8 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
 " Syntax checking for a multitude of languages
 Plugin 'scrooloose/syntastic'
+" Snippet engine
+Plugin 'SirVer/ultisnips'
 " Needed for some other plugins
 Plugin 'Shougo/vimproc.vim'
 " Comment out code easily
@@ -149,6 +153,24 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 " === YouCompleteMe plugin settings ===
 "
 let g:ycm_semantic_triggers = {'haskell': ['.']}
+
+" === UltiSnips plugin settings ===
+"
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:UltiSnipsListSnippets = "<nop>"
+let g:UltiSnipsJumpForwardTrigger = "<nop>"
+let g:UltiSnipsJumpBackwardTrigger = "<nop>"
+
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 " === Indent Guides plugin settings ===
 "
