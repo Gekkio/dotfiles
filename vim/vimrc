@@ -156,21 +156,42 @@ let g:ycm_semantic_triggers = {'haskell': ['.']}
 
 " === UltiSnips plugin settings ===
 "
-let g:UltiSnipsExpandTrigger = "<nop>"
-let g:UltiSnipsListSnippets = "<nop>"
-let g:UltiSnipsJumpForwardTrigger = "<nop>"
-let g:UltiSnipsJumpBackwardTrigger = "<nop>"
 
-let g:ulti_expand_or_jump_res = 0
-function ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-        return snippet
+let g:UltiSnipsExpandTrigger       = "<c-tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Enable tabbing through list of results
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
     else
-        return "\<CR>"
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
     endif
+  endif
+  return ""
 endfunction
-inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" Expand snippet or return
+let g:ulti_expand_res = 0
+function! Ulti_ExpandOrEnter()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res
+    return ''
+  else
+    return "\<return>"
+  endif
+endfunction
+
+" Set <space> as primary trigger
+inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 
 " === Indent Guides plugin settings ===
 "
