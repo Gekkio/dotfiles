@@ -31,6 +31,8 @@ Plugin 'gregsexton/gitv'
 Plugin 'honza/vim-snippets'
 " Improved Javascript syntax highlighting
 Plugin 'jelera/vim-javascript-syntax'
+" Text alignment
+Plugin 'junegunn/vim-easy-align'
 " Typescript support
 Plugin 'leafgarland/typescript-vim'
 " Tmux integration
@@ -234,6 +236,11 @@ if executable('ocamlmerlin') && executable('opam')
 
   let g:syntastic_ocaml_checkers=['merlin']
 endif
+
+" === EasyAlign ===
+"
+xmap <unique> <Leader>a <Plug>(EasyAlign)
+nmap <unique> <Leader>a <Plug>(EasyAlign)
 
 " Include .vimrc.local if it exists
 if filereadable($HOME.'/.vimrc.local')
