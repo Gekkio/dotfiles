@@ -155,6 +155,7 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 " === YouCompleteMe plugin settings ===
 "
 let g:ycm_semantic_triggers = {'haskell': ['.']}
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " === UltiSnips plugin settings ===
 "
