@@ -22,11 +22,13 @@ typeset -U path
 pathdirs=(
   "$HOME/.npm-packages/bin"
   "$HOME/.cabal/bin"
+  "$HOME/.gem/ruby/2.3.0/bin"
   "$HOME/.gem/ruby/2.1.0/bin"
   "$HOME/.gem/ruby/1.9.1/bin"
   "$HOME/bin/symlinks/android-sdk/tools"
   "$HOME/bin/symlinks/android-sdk/platform-tools"
   "$HOME/bin/symlinks/android-ndk"
+  "$HOME/.cargo/bin"
   "$HOME/.local/bin"
   "$HOME/bin"
 )
