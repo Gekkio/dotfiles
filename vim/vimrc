@@ -15,8 +15,6 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'cschlueter/vim-wombat'
 " Fuzzy file searcher. Useful for finding and opening files quickly
 Plugin 'ctrlpvim/ctrlp.vim'
-" Improved Haskell support
-Plugin 'dag/vim2hs'
 " Ocaml indentation
 Plugin 'def-lkb/ocp-indent-vim'
 " Scala editing support
@@ -47,8 +45,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
 " Automatically add closing delimiter (e.g. '' or <>)
 Plugin 'Raimondi/delimitMate'
-" Integration with The Silver Searcher
-Plugin 'rking/ag.vim'
 " Rust editing support
 Plugin 'rust-lang/rust.vim'
 " File tree explorer
@@ -78,8 +74,6 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 " Very useful plugin for doing quick notes
 Plugin 'vimoutliner/vimoutliner'
-" GNU global support
-Plugin 'vim-scripts/gtags.vim'
 
 call vundle#end()
 filetype plugin indent on
