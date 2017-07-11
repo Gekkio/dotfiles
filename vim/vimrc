@@ -87,7 +87,7 @@ filetype plugin indent on
 " Blink screen instead of beeping
 set visualbell
 " Ignore certain file patterns. Used by for example ctrl+p
-set wildignore+=.svn,.git,*.o,*.jar,*.class
+set wildignore+=.svn,.git,*.o,*.jar,*.class,node_modules
 " Don't litter the file system with backup files
 set nobackup
 " Enable mouse support
