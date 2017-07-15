@@ -25,6 +25,7 @@ myManageHook = composeAll [ manageWindow, manageOverrides ]
           ]
         manageOverrides = composeOne
           [ className =? "Teensy" -?> doSideFloat CE
+          , (className =? "xsane" <||> className =? "Xsane") <&&> title =? "Warning" -?> doFloat
           ]
         isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"
 
