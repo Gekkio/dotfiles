@@ -10,6 +10,8 @@ import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Tabbed (simpleTabbed)
 
+import qualified Data.Map as M
+
 myLayoutHook = tiled ||| Full ||| simpleTabbed ||| Grid
   where tiled = Tall 1 (3/100) (3/5)
 
@@ -30,9 +32,14 @@ myModMask = mod4Mask
 
 myStartupHook = setWMName "LG3D"
 
+myKeys (XConfig {modMask = modMask}) = M.fromList
+  [ ((modMask .|. shiftMask, xK_q), spawn "gnome-session-quit --logout")
+  ]
+
 myConfig baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModifiers $ baseConfig
   { focusFollowsMouse = True
   , layoutHook = myLayoutHook
+  , keys = myKeys <+> keys baseConfig
   , manageHook = myManageHook <+> manageHook baseConfig
   , modMask = myModMask
   , startupHook = startupHook baseConfig >> myStartupHook
