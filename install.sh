@@ -42,9 +42,14 @@ link "$HOME/.tmux.conf" "$SCRIPT_PATH/tmux.conf"
 # vim
 
 mkdir -p "$HOME/.vim/bundle"
-
-link "$HOME/.vimrc" "$SCRIPT_PATH/vim/vimrc"
+link "$HOME/.vim/vimrc" "$SCRIPT_PATH/vim/vimrc"
 link "$HOME/.gvimrc" "$SCRIPT_PATH/vim/gvimrc"
+
+# neovim
+
+mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.local/share/nvim/bundle"
+link "$HOME/.config/nvim/init.vim" "$SCRIPT_PATH/vim/vimrc"
 
 # vim vundle
 if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
@@ -52,7 +57,16 @@ if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
     echo git must be installed!
     exit 1
   fi
-  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+  git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+fi
+
+# neovim vundle
+if [ ! -e "$HOME/.local/share/nvim/bundle/Vundle.vim" ]; then
+  if [ ! `which git` ]; then
+    echo git must be installed!
+    exit 1
+  fi
+  git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.local/share/nvim/bundle/Vundle.vim
 fi
 
 # xmonad

@@ -1,14 +1,28 @@
 " === Vundle initialization ===
 "
+
+if has('nvim')
+    set rtp+=~/.local/share/nvim/bundle/Vundle.vim/
+else
+    set rtp+=~/.vim/bundle/Vundle.vim/
+endif
+
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+if has('nvim')
+  call vundle#begin('~/.local/share/nvim/bundle')
+else
+  call vundle#begin('~/.vim/bundle')
+endif
 
 " === Plugins ===
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
+"
+Plugin 'airblade/vim-gitgutter'
+"
+Plugin 'cespare/vim-toml'
 " Unified tmux/vim navigation
 Plugin 'christoomey/vim-tmux-navigator'
 " Wombat color theme
@@ -55,6 +69,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 " Needed for some other plugins
 Plugin 'Shougo/vimproc.vim'
+"
+Plugin 'tikhomirov/vim-glsl'
 " Comment out code easily
 Plugin 'tomtom/tcomment_vim'
 " Display character codes in unicode/HTML/etc
@@ -67,6 +83,8 @@ Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-sensible'
 " Figures out and sets indentation settings automatically
 Plugin 'tpope/vim-sleuth'
+"
+Plugin 'tpope/vim-surround'
 " Fairly intuitive key mappings for operation pairs
 " (previous/next, up/down, etc)
 Plugin 'tpope/vim-unimpaired'
@@ -74,6 +92,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 " Very useful plugin for doing quick notes
 Plugin 'vimoutliner/vimoutliner'
+"
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 call vundle#end()
 filetype plugin indent on
@@ -213,7 +233,13 @@ endif
 xmap <unique> <Leader>a <Plug>(EasyAlign)
 nmap <unique> <Leader>a <Plug>(EasyAlign)
 
-" Include .vimrc.local if it exists
-if filereadable($HOME.'/.vimrc.local')
-  source $HOME/.vimrc.local
+" Include local configuration if it exists
+if has('nvim')
+  if filereadable($HOME.'/.config/nvim/init.vim.local')
+    source $HOME/.config/nvim/init.vim.local
+  endif
+else
+  if filereadable($HOME.'/.vim/vimrc.local')
+    source $HOME/.vim/vimrc.local
+  endif
 endif
