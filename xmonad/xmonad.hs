@@ -12,7 +12,7 @@ import XMonad.Layout.Tabbed (simpleTabbed)
 
 import qualified Data.Map as M
 
-myLayoutHook = tiled ||| Full ||| simpleTabbed ||| Grid
+myLayoutHook = tiled ||| Mirror tiled ||| Full ||| simpleTabbed ||| Grid
   where tiled = Tall 1 (3/100) (3/5)
 
 myManageHook = composeAll [ manageWindow, manageOverrides ]
