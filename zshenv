@@ -3,6 +3,8 @@ export DEBFULLNAME="Joonas Javanainen"
 
 whence vim &> /dev/null && export EDITOR="vim"; export VISUAL="vim"
 
+export GPG_TTY=`tty`
+
 if [[ "$COLORTERM" = "gnome-terminal" ]] || [[ ${$(</proc/$PPID/cmdline):t} == gnome-terminal* ]]; then
   export TERM=xterm-256color
 fi
