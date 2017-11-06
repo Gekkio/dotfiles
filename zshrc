@@ -54,6 +54,8 @@ if [ -e "$ZSH" ]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
+stty -ixon
+
 [[ -f "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"
 
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
