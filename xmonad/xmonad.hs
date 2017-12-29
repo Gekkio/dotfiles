@@ -3,9 +3,9 @@
 import XMonad
 import XMonad.Config.Desktop (desktopLayoutModifiers)
 import XMonad.Config.Gnome (gnomeConfig)
-import XMonad.Hooks.ManageHelpers (composeOne, doSideFloat, isDialog, isInProperty, transience, (-?>), Side(CE))
+import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
+import XMonad.Hooks.ManageHelpers (composeOne, doFullFloat, doSideFloat, isDialog, isFullscreen, isInProperty, transience', (-?>), Side(CE))
 import XMonad.Hooks.SetWMName (setWMName)
-import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Tabbed (simpleTabbed)
@@ -15,9 +15,9 @@ import qualified Data.Map as M
 myLayoutHook = tiled ||| Mirror tiled ||| Full ||| simpleTabbed ||| Grid
   where tiled = Tall 1 (3/100) (3/5)
 
-myManageHook = composeAll [ manageWindow, manageOverrides ]
+myManageHook = composeAll [ transience', manageWindow, manageOverrides ]
   where manageWindow = composeOne
-          [ transience
+          [ isFullscreen -?> doFullFloat
           -- Dialogs (e.g. Ubuntu logout dialog)
           , isDialog -?> doFloat
           -- Splash screens
@@ -47,7 +47,7 @@ myConfig baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModif
   }
   where
     -- Include support for full screen windows
-    withFullscreen = fullscreenSupport
+    withFullscreen c = c { handleEventHook = handleEventHook c <+> fullscreenEventHook }
     -- Include smart borders (= hide when only one window exists)
     withSmartBorders c = c { layoutHook = smartBorders $ layoutHook c }
     -- Include sane desktop behaviour (e.g. avoidStruts for docks/panels)
