@@ -94,6 +94,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vimoutliner/vimoutliner'
 "
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+"
+Plugin 'zainin/vim-mikrotik'
 
 call vundle#end()
 filetype plugin indent on
