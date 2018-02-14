@@ -1,6 +1,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 
 import XMonad
+import XMonad.Actions.UpdatePointer (updatePointer)
 import XMonad.Config.Desktop (desktopLayoutModifiers)
 import XMonad.Config.Gnome (gnomeConfig)
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
@@ -33,6 +34,8 @@ myManageHook = composeAll [ transience', manageWindow, manageOverrides ]
           ]
         isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"
 
+myLogHook = updatePointer (0.5, 0.5) (0, 0)
+
 myModMask = mod4Mask
 
 myStartupHook = setWMName "LG3D"
@@ -51,6 +54,7 @@ myConfig nScreens baseConfig = withSmartBorders $ withFullscreen $ withDesktopLa
   { focusFollowsMouse = True
   , layoutHook = myLayoutHook
   , keys = myKeys nScreens <+> keys baseConfig
+  , logHook = logHook baseConfig >> myLogHook
   , manageHook = myManageHook <+> manageHook baseConfig
   , modMask = myModMask
   , startupHook = startupHook baseConfig >> myStartupHook
