@@ -7,10 +7,12 @@ import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.ManageHelpers (composeOne, doFullFloat, doSideFloat, isDialog, isFullscreen, isInProperty, transience', (-?>), Side(CE))
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Grid (Grid(..))
+import XMonad.Layout.IndependentScreens (countScreens, onCurrentScreen, withScreens, workspaces')
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Tabbed (simpleTabbed)
 
 import qualified Data.Map as M
+import qualified XMonad.StackSet as W
 
 myLayoutHook = tiled ||| Mirror tiled ||| Full ||| simpleTabbed ||| Grid
   where tiled = Tall 1 (3/100) (3/5)
@@ -34,17 +36,22 @@ myModMask = mod4Mask
 
 myStartupHook = setWMName "LG3D"
 
-myKeys (XConfig {modMask = modMask}) = M.fromList
+myKeys conf @ (XConfig {modMask = modMask}) = M.fromList $
   [ ((modMask .|. shiftMask, xK_q), spawn "gnome-session-quit --logout")
   ]
+  ++
+  [ ((m .|. modMask, k), windows $ onCurrentScreen f i)
+         | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
+         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
-myConfig baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModifiers $ baseConfig
+myConfig nScreens baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModifiers $ baseConfig
   { focusFollowsMouse = True
   , layoutHook = myLayoutHook
   , keys = myKeys <+> keys baseConfig
   , manageHook = myManageHook <+> manageHook baseConfig
   , modMask = myModMask
   , startupHook = startupHook baseConfig >> myStartupHook
+  , workspaces = if nScreens > 1 then withScreens nScreens (workspaces defaultConfig) else workspaces defaultConfig
   }
   where
     -- Include support for full screen windows
@@ -54,4 +61,6 @@ myConfig baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModif
     -- Include sane desktop behaviour (e.g. avoidStruts for docks/panels)
     withDesktopLayoutModifiers c = c { layoutHook = desktopLayoutModifiers $ layoutHook c }
 
-main = xmonad $ myConfig $ gnomeConfig
+main = do
+  nScreens <- countScreens
+  xmonad $ myConfig nScreens $ gnomeConfig
