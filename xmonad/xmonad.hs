@@ -36,18 +36,20 @@ myModMask = mod4Mask
 
 myStartupHook = setWMName "LG3D"
 
-myKeys conf @ (XConfig {modMask = modMask}) = M.fromList $
+myKeys nScreens conf @ (XConfig {modMask = modMask}) = M.fromList $
   [ ((modMask .|. shiftMask, xK_q), spawn "gnome-session-quit --logout")
   ]
   ++
-  [ ((m .|. modMask, k), windows $ onCurrentScreen f i)
-         | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
-         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+  if nScreens > 1
+  then [ ((m .|. modMask, k), windows $ onCurrentScreen f i)
+              | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
+              , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+  else []
 
 myConfig nScreens baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModifiers $ baseConfig
   { focusFollowsMouse = True
   , layoutHook = myLayoutHook
-  , keys = myKeys <+> keys baseConfig
+  , keys = myKeys nScreens <+> keys baseConfig
   , manageHook = myManageHook <+> manageHook baseConfig
   , modMask = myModMask
   , startupHook = startupHook baseConfig >> myStartupHook
