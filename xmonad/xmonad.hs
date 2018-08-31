@@ -4,7 +4,7 @@ import XMonad
 import XMonad.Config.Desktop (desktopLayoutModifiers)
 import XMonad.Config.Gnome (gnomeConfig)
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
-import XMonad.Hooks.ManageHelpers (composeOne, doFullFloat, doSideFloat, isDialog, isFullscreen, isInProperty, transience', (-?>), Side(CE))
+import XMonad.Hooks.ManageHelpers (composeOne, doCenterFloat, doFullFloat, doSideFloat, isDialog, isFullscreen, isInProperty, transience', (-?>), Side(CE))
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.IndependentScreens (countScreens, onCurrentScreen, withScreens, workspaces')
@@ -29,6 +29,7 @@ myManageHook = composeAll [ transience', manageWindow, manageOverrides ]
           [ className =? "Teensy" -?> doSideFloat CE
           , (className =? "xsane" <||> className =? "Xsane") <&&> title =? "Warning" -?> doFloat
           , className =? "Gnome-calculator" -?> doFloat
+          , className =? "mooneye-gb" -?> doCenterFloat
           ]
         isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"
 
