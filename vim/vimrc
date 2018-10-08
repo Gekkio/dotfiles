@@ -1,104 +1,80 @@
-" === Vundle initialization ===
-"
-
-if has('nvim')
-    set rtp+=~/.local/share/nvim/bundle/Vundle.vim/
-else
-    set rtp+=~/.vim/bundle/Vundle.vim/
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set nocompatible
-filetype off
-if has('nvim')
-  call vundle#begin('~/.local/share/nvim/bundle')
-else
-  call vundle#begin('~/.vim/bundle')
-endif
-
-" === Plugins ===
-
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 "
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 "
-Plugin 'cespare/vim-toml'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 " Unified tmux/vim navigation
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 " Wombat color theme
-Plugin 'cschlueter/vim-wombat'
+Plug 'cschlueter/vim-wombat'
 " Fuzzy file searcher. Useful for finding and opening files quickly
-Plugin 'ctrlpvim/ctrlp.vim'
-" Ocaml indentation
-Plugin 'def-lkb/ocp-indent-vim'
-" Scala editing support
-Plugin 'derekwyatt/vim-scala'
-" Haskell ghc-mod integration
-Plugin 'eagletmt/ghcmod-vim'
-" Haskell completion
-Plugin 'eagletmt/neco-ghc'
+Plug 'ctrlpvim/ctrlp.vim'
 " Tab completion
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 " Excellent git repository viewer
-Plugin 'gregsexton/gitv'
+Plug 'gregsexton/gitv'
 " Snippets
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 " Improved Javascript syntax highlighting
-Plugin 'jelera/vim-javascript-syntax'
+Plug 'jelera/vim-javascript-syntax'
 " Text alignment
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 " Typescript support
-Plugin 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 " Tmux integration
-Plugin 'mhinz/vim-tmuxify'
+Plug 'mhinz/vim-tmuxify'
 " Display indentation visually with colors
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 " Improved Javascript editing (e.g. indentation)
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 " Markdown editing support
-Plugin 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 " Automatically add closing delimiter (e.g. '' or <>)
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " Rust editing support
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " File tree explorer
-Plugin 'scrooloose/nerdtree'
-" Syntax checking for a multitude of languages
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Snippet engine
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Needed for some other plugins
-Plugin 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "
-Plugin 'tikhomirov/vim-glsl'
+Plug 'tikhomirov/vim-glsl'
 " Comment out code easily
-Plugin 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 " Display character codes in unicode/HTML/etc
-Plugin 'tpope/vim-characterize'
+Plug 'tpope/vim-characterize'
 " Deep git integration with support for most common git commands
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " Improved git syntax highlighting and support
-Plugin 'tpope/vim-git'
+Plug 'tpope/vim-git'
 " Sensible vim defaults, which enables this vimrc to be fairly short
-Plugin 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 " Figures out and sets indentation settings automatically
-Plugin 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth'
 "
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " Fairly intuitive key mappings for operation pairs
 " (previous/next, up/down, etc)
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 " Much improved auto completion engine
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer' }
 " Very useful plugin for doing quick notes
-Plugin 'vimoutliner/vimoutliner'
+Plug 'vimoutliner/vimoutliner'
 "
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 "
-Plugin 'zainin/vim-mikrotik'
+Plug 'zainin/vim-mikrotik', { 'for': 'rsc' }
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 " Blink screen instead of beeping
 set visualbell
@@ -119,6 +95,10 @@ set tabstop=2
 
 autocmd FileType rust setlocal colorcolumn=100
 
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ }
+
 " === Key mappings ===
 "
 " [ and ] are used in some key mappings, but they are awkward with the Finnish
@@ -137,23 +117,6 @@ let mapleader=","
 map <silent> <F2> :NERDTreeToggle<CR>
 map <silent> <S-F2> :NERDTreeMirror<CR>
 
-" Fix F1-F4 mappings in gnome-terminal
-if $COLORTERM == "gnome-terminal"
-  execute "set <F1>=\eOP"
-  execute "set <F2>=\eOQ"
-  execute "set <F3>=\eOR"
-  execute "set <F4>=\eOS"
-  execute "set <xF1>=\eO1;*P"
-  execute "set <xF2>=\eO1;*Q"
-  execute "set <xF3>=\eO1;*R"
-  execute "set <xF4>=\eO1;*S"
-endif
-
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
 let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
 let g:tmuxify_global_maps = 1
 
@@ -165,15 +128,6 @@ let g:syntastic_java_checkers = []
 let g:syntastic_asm_checkers = []
 " Disable annoying csslint options which are way too strict
 let g:syntastic_css_csslint_args='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
-
-" === neco-ghc plugin settings ===
-"
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-" === YouCompleteMe plugin settings ===
-"
-let g:ycm_semantic_triggers = {'haskell': ['.']}
-let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " === UltiSnips plugin settings ===
 "
@@ -227,27 +181,13 @@ else
   endtry
 endif
 
-" === Ocaml Merlin support ===
-"
-if executable('ocamlmerlin') && executable('opam')
-  let s:ocamlmerlin = substitute(system('opam config var share'), '\n$', '', '''') . "/ocamlmerlin"
-  execute "set rtp+=".s:ocamlmerlin."/vim"
-
-  let g:syntastic_ocaml_checkers=['merlin']
-endif
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 " === EasyAlign ===
 "
 xmap <unique> <Leader>a <Plug>(EasyAlign)
 nmap <unique> <Leader>a <Plug>(EasyAlign)
 
-" Include local configuration if it exists
-if has('nvim')
-  if filereadable($HOME.'/.config/nvim/init.vim.local')
-    source $HOME/.config/nvim/init.vim.local
-  endif
-else
-  if filereadable($HOME.'/.vim/vimrc.local')
-    source $HOME/.vim/vimrc.local
-  endif
+if filereadable($HOME.'/.vim/vimrc.local')
+  source $HOME/.vim/vimrc.local
 endif
