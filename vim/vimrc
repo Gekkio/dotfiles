@@ -1,10 +1,18 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if has('nvim')
+  if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+  call plug#begin('~/.local/share/nvim/plugged')
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+  call plug#begin('~/.vim/plugged')
 endif
-
-call plug#begin('~/.vim/plugged')
 
 "
 Plug 'airblade/vim-gitgutter'
@@ -95,9 +103,16 @@ set tabstop=2
 
 autocmd FileType rust setlocal colorcolumn=100
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ }
+let g:LanguageClient_serverCommands = {}
+
+if executable('rls')
+  let g:LanguageClient_serverCommands.rust = ['rls']
+endif
+
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+endif
 
 " === Key mappings ===
 "
@@ -119,15 +134,6 @@ map <silent> <S-F2> :NERDTreeMirror<CR>
 
 let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
 let g:tmuxify_global_maps = 1
-
-" === Syntastic plugin settings ===
-"
-" Disable annoying java checker which breaks horribly unless you manually
-" configure classpath for every single project
-let g:syntastic_java_checkers = []
-let g:syntastic_asm_checkers = []
-" Disable annoying csslint options which are way too strict
-let g:syntastic_css_csslint_args='--ignore=ids,overqualified-elements,unique-headings,adjoining-classes,box-model,qualified-headings'
 
 " === UltiSnips plugin settings ===
 "
@@ -151,14 +157,12 @@ let omni_sql_no_default_maps=1
 
 " === CtrlP plugin settings ===
 
-if executable('ag')
-  let g:ctrlp_user_command = 'ag -g "" -l --nocolor %s'
-endif
-
 if executable('rg')
   set grepprg=rg\ --color=never
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
+elseif executable('ag')
+  let g:ctrlp_user_command = 'ag -g "" -l --nocolor %s'
 endif
 
 " === Colorscheme settings ===
@@ -188,6 +192,12 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 xmap <unique> <Leader>a <Plug>(EasyAlign)
 nmap <unique> <Leader>a <Plug>(EasyAlign)
 
-if filereadable($HOME.'/.vim/vimrc.local')
-  source $HOME/.vim/vimrc.local
+if has('nvim')
+  if filereadable($HOME.'/.config/nvim/init.vim.local')
+    source $HOME/.config/nvim/init.vim.local
+  endif
+else
+  if filereadable($HOME.'/.vim/vimrc.local')
+    source $HOME/.vim/vimrc.local
+  endif
 endif
