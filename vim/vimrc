@@ -73,14 +73,21 @@ Plug 'tpope/vim-surround'
 " Fairly intuitive key mappings for operation pairs
 " (previous/next, up/down, etc)
 Plug 'tpope/vim-unimpaired'
-" Much improved auto completion engine
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer' }
 " Very useful plugin for doing quick notes
 Plug 'vimoutliner/vimoutliner'
 "
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 "
 Plug 'zainin/vim-mikrotik', { 'for': 'rsc' }
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 call plug#end()
 
