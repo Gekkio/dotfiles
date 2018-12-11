@@ -17,6 +17,10 @@ if [[ -h "$HOME/bin/symlinks/android-ndk" ]]; then
   export ANDROID_NDK_HOME=$HOME/bin/symlinks/android-ndk
 fi
 
+if [[ "$DESKTOP_SESSION" = "gnome-xmonad" ]]; then
+  export _JAVA_AWT_WM_NONREPARENTING=1
+fi
+
 typeset -U path
 
 pathdirs=(
