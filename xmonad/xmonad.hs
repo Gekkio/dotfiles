@@ -38,6 +38,8 @@ myLogHook = updatePointer (0.5, 0.5) (0, 0)
 
 myModMask = mod4Mask
 
+myStartupHook = setWMName "LG3D"
+
 myKeys nScreens conf @ (XConfig {modMask = modMask}) = M.fromList $
   [ ((modMask .|. shiftMask, xK_q), spawn "gnome-session-quit --logout")
   ]
@@ -55,6 +57,7 @@ myConfig nScreens baseConfig = withSmartBorders $ withFullscreen $ withDesktopLa
   , logHook = logHook baseConfig >> myLogHook
   , manageHook = myManageHook <+> manageHook baseConfig
   , modMask = myModMask
+  , startupHook = startupHook baseConfig >> myStartupHook
   , workspaces = if nScreens > 1 then withScreens nScreens (workspaces defaultConfig) else workspaces defaultConfig
   }
   where
