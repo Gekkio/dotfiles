@@ -26,6 +26,8 @@ Plug 'cschlueter/vim-wombat'
 Plug 'ctrlpvim/ctrlp.vim'
 " Excellent git repository viewer
 Plug 'gregsexton/gitv'
+"
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 " Snippets
 Plug 'honza/vim-snippets'
 " Improved Javascript syntax highlighting
@@ -44,6 +46,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 " Automatically add closing delimiter (e.g. '' or <>)
 Plug 'Raimondi/delimitMate'
+"
+Plug 'reasonml-editor/vim-reason-plus'
 " Rust editing support
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " File tree explorer
@@ -119,6 +123,10 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
 endif
 
+if executable('reason-language-server.exe')
+  let g:LanguageClient_serverCommands.reason = ['reason-language-server.exe']
+endif
+
 " === Key mappings ===
 "
 " [ and ] are used in some key mappings, but they are awkward with the Finnish
@@ -186,6 +194,10 @@ else
 endif
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
+let g:LanguageClient_loggingLevel = 'INFO'
+let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
+let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 
 " === EasyAlign ===
 "
