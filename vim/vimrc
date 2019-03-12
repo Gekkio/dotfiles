@@ -31,7 +31,7 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 " Snippets
 Plug 'honza/vim-snippets'
 " Improved Javascript syntax highlighting
-Plug 'jelera/vim-javascript-syntax'
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 " Text alignment
 Plug 'junegunn/vim-easy-align'
 " Typescript support
@@ -41,13 +41,13 @@ Plug 'mhinz/vim-tmuxify'
 " Display indentation visually with colors
 Plug 'nathanaelkane/vim-indent-guides'
 " Improved Javascript editing (e.g. indentation)
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 " Markdown editing support
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " Automatically add closing delimiter (e.g. '' or <>)
 Plug 'Raimondi/delimitMate'
 "
-Plug 'reasonml-editor/vim-reason-plus'
+Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason' }
 " Rust editing support
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " File tree explorer
@@ -57,7 +57,7 @@ Plug 'SirVer/ultisnips'
 " Needed for some other plugins
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "
-Plug 'tikhomirov/vim-glsl'
+Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 " Comment out code easily
 Plug 'tomtom/tcomment_vim'
 " Display character codes in unicode/HTML/etc
@@ -76,7 +76,7 @@ Plug 'tpope/vim-surround'
 " (previous/next, up/down, etc)
 Plug 'tpope/vim-unimpaired'
 " Very useful plugin for doing quick notes
-Plug 'vimoutliner/vimoutliner'
+Plug 'vimoutliner/vimoutliner', { 'for': 'votl' }
 "
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 "
