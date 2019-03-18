@@ -127,6 +127,10 @@ if executable('reason-language-server.exe')
   let g:LanguageClient_serverCommands.reason = ['reason-language-server.exe']
 endif
 
+if executable('bingo')
+  let g:LanguageClient_serverCommands.go = ['bingo']
+endif
+
 " === Key mappings ===
 "
 " [ and ] are used in some key mappings, but they are awkward with the Finnish

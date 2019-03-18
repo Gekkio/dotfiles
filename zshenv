@@ -20,6 +20,7 @@ fi
 typeset -U path
 
 pathdirs=(
+  "$HOME/go/bin"
   "$HOME/.yarn/bin"
   "$HOME/.cabal/bin"
   "$HOME/.gem/ruby/2.3.0/bin"
