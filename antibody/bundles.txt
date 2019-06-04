@@ -1,0 +1,5 @@
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+mafredri/zsh-async
+robbyrussell/oh-my-zsh path:lib
+sindresorhus/pure
