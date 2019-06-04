@@ -54,3 +54,8 @@ link "$HOME/.xmonad/xmonad.hs" "$SCRIPT_PATH/xmonad/xmonad.hs"
 
 link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
 link "$HOME/.zshrc" "$SCRIPT_PATH/zshrc"
+
+mkdir -p $HOME/bin
+if [ ! -e "$HOME/bin/antibody" ]; then
+  curl -L https://github.com/getantibody/antibody/releases/download/v4.1.1/antibody_Linux_x86_64.tar.gz | tar -C $HOME/bin xz antibody
+fi
