@@ -28,13 +28,6 @@ link() {
   fi
 }
 
-# npm
-
-mkdir -p "$HOME/.npm-packages"
-if [ ! -e "$HOME/.npmrc" ]; then
-  echo "prefix = $HOME/.npm-packages" > "$HOME/.npmrc"
-fi
-
 # tmux
 
 link "$HOME/.tmux.conf" "$SCRIPT_PATH/tmux.conf"
