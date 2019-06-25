@@ -75,6 +75,8 @@ Plug 'tpope/vim-surround'
 " Fairly intuitive key mappings for operation pairs
 " (previous/next, up/down, etc)
 Plug 'tpope/vim-unimpaired'
+" Kotlin support
+Plug 'udalov/kotlin-vim'
 " Very useful plugin for doing quick notes
 Plug 'vimoutliner/vimoutliner', { 'for': 'votl' }
 "
