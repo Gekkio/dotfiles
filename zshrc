@@ -17,3 +17,5 @@ fi
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 [[ -s "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+true
