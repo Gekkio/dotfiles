@@ -15,8 +15,6 @@ else
 endif
 
 "
-Plug 'airblade/vim-gitgutter'
-"
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 " Unified tmux/vim navigation
 Plug 'christoomey/vim-tmux-navigator'
@@ -24,18 +22,22 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'cschlueter/vim-wombat'
 " Fuzzy file searcher. Useful for finding and opening files quickly
 Plug 'ctrlpvim/ctrlp.vim'
-" Excellent git repository viewer
-Plug 'gregsexton/gitv'
 "
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 " Snippets
 Plug 'honza/vim-snippets'
-" Improved Javascript syntax highlighting
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+"
+Plug 'junegunn/goyo.vim'
+"
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
+"
+Plug 'junegunn/limelight.vim'
 " Text alignment
 Plug 'junegunn/vim-easy-align'
 " Typescript support
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+"
+Plug 'mhinz/vim-signify'
 " Tmux integration
 Plug 'mhinz/vim-tmuxify'
 " Display indentation visually with colors
@@ -76,7 +78,7 @@ Plug 'tpope/vim-surround'
 " (previous/next, up/down, etc)
 Plug 'tpope/vim-unimpaired'
 " Kotlin support
-Plug 'udalov/kotlin-vim'
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 " Very useful plugin for doing quick notes
 Plug 'vimoutliner/vimoutliner', { 'for': 'votl' }
 "
@@ -152,8 +154,7 @@ nmap Ä }
 let mapleader=","
 
 " Mappings for NERD tree plugin
-map <silent> <F2> :NERDTreeToggle<CR>
-map <silent> <S-F2> :NERDTreeMirror<CR>
+noremap <silent> <F2> :NERDTreeToggle<CR>
 
 let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
 let g:tmuxify_global_maps = 1
@@ -205,10 +206,15 @@ endif
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
+nnoremap <unique> <Leader>gy :Goyo<CR>
+
+nmap <unique> <Leader>ll <Plug>(Limelight)
+xmap <unique> <Leader>ll <Plug>(Limelight)
+
 " === EasyAlign ===
 "
-xmap <unique> <Leader>a <Plug>(EasyAlign)
 nmap <unique> <Leader>a <Plug>(EasyAlign)
+xmap <unique> <Leader>a <Plug>(EasyAlign)
 
 if has('nvim')
   if filereadable($HOME.'/.config/nvim/init.vim.local')
