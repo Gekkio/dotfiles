@@ -37,6 +37,8 @@ Plug 'junegunn/vim-easy-align'
 " Typescript support
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 "
+Plug 'lervag/vimtex'
+"
 Plug 'mhinz/vim-signify'
 " Tmux integration
 Plug 'mhinz/vim-tmuxify'
@@ -152,6 +154,7 @@ nmap Ä }
 " mapleader is used in some key mappings. Default is backslash, which is way
 " too awkard with the Finnish keyboard layout
 let mapleader=","
+let maplocalleader=","
 
 " Mappings for NERD tree plugin
 noremap <silent> <F2> :NERDTreeToggle<CR>
@@ -206,10 +209,9 @@ endif
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
-nnoremap <unique> <Leader>gy :Goyo<CR>
+nnoremap <silent> <unique> <Leader>gy :Goyo<CR>
 
-nmap <unique> <Leader>ll <Plug>(Limelight)
-xmap <unique> <Leader>ll <Plug>(Limelight)
+nnoremap <silent> <unique> <Leader>al :Limelight!!<CR>
 
 " === EasyAlign ===
 "
