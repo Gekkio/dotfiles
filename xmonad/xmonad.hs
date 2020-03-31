@@ -1,5 +1,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 
+import Data.Function (on)
+import Data.List (nub, sortOn)
 import XMonad
 import XMonad.Actions.UpdatePointer (updatePointer)
 import XMonad.Config.Desktop (desktopLayoutModifiers)
@@ -8,7 +10,7 @@ import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.ManageHelpers (composeOne, doCenterFloat, doFullFloat, doSideFloat, isDialog, isFullscreen, isInProperty, transience', (-?>), Side(CE))
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Grid (Grid(..))
-import XMonad.Layout.IndependentScreens (countScreens, onCurrentScreen, withScreens, workspaces')
+import XMonad.Layout.IndependentScreens (countScreens, onCurrentScreen, unmarshall, unmarshallS, withScreens, workspaces')
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Tabbed (simpleTabbed)
 
@@ -34,7 +36,13 @@ myManageHook = composeAll [ transience', manageWindow, manageOverrides ]
           ]
         isSplash = isInProperty "_NET_WM_WINDOW_TYPE" "_NET_WM_WINDOW_TYPE_SPLASH"
 
-myLogHook = updatePointer (0.5, 0.5) (0, 0)
+screensChanged = do
+  actualScreens <- countScreens
+  workspaceScreens <- reader $ length . nub . fmap unmarshallS . workspaces . config
+  return $ actualScreens /= workspaceScreens
+
+myLogHook = whenX screensChanged restartXmonad
+  where restartXmonad = trace "Restarting xmonad" >> restart "xmonad" True
 
 myModMask = mod4Mask
 
@@ -44,11 +52,9 @@ myKeys nScreens conf @ (XConfig {modMask = modMask}) = M.fromList $
   [ ((modMask .|. shiftMask, xK_q), spawn "gnome-session-quit --logout")
   ]
   ++
-  if nScreens > 1
-  then [ ((m .|. modMask, k), windows $ onCurrentScreen f i)
-              | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
-              , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-  else []
+  [ ((m .|. modMask, k), windows $ onCurrentScreen f i)
+         | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
+         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 myConfig nScreens baseConfig = withSmartBorders $ withFullscreen $ withDesktopLayoutModifiers $ baseConfig
   { focusFollowsMouse = True
@@ -58,7 +64,7 @@ myConfig nScreens baseConfig = withSmartBorders $ withFullscreen $ withDesktopLa
   , manageHook = myManageHook <+> manageHook baseConfig
   , modMask = myModMask
   , startupHook = startupHook baseConfig >> myStartupHook
-  , workspaces = if nScreens > 1 then withScreens nScreens (workspaces defaultConfig) else workspaces defaultConfig
+  , workspaces = sortOn unmarshall . withScreens nScreens $ workspaces def
   }
   where
     -- Include support for full screen windows
