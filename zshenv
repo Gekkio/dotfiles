@@ -23,6 +23,7 @@ pathdirs=(
   "$HOME/go/bin"
   "$HOME/.yarn/bin"
   "$HOME/.cabal/bin"
+  "$HOME/.poetry/bin"
   "$HOME/.gem/ruby/2.5.0/bin"
   "$HOME/.gem/ruby/2.3.0/bin"
   "$HOME/bin/symlinks/android-sdk/tools"
