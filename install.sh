@@ -57,5 +57,5 @@ link "$HOME/.zshrc" "$SCRIPT_PATH/zshrc"
 
 mkdir -p $HOME/bin
 if [ ! -e "$HOME/bin/antibody" ]; then
-  curl -L https://github.com/getantibody/antibody/releases/download/v4.1.2/antibody_Linux_x86_64.tar.gz | tar -C $HOME/bin -xz antibody
+  curl -L https://github.com/getantibody/antibody/releases/download/v6.0.1/antibody_Linux_x86_64.tar.gz | tar -C $HOME/bin -xz antibody
 fi
