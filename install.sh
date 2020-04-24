@@ -55,6 +55,8 @@ link "$HOME/.xmonad/xmonad.hs" "$SCRIPT_PATH/xmonad/xmonad.hs"
 link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
 link "$HOME/.zshrc" "$SCRIPT_PATH/zshrc"
 
+link "$HOME/.config/gtk-3.0/gtk.css" "$SCRIPT_PATH/gtk.css"
+
 mkdir -p $HOME/bin
 if [ ! -e "$HOME/bin/antibody" ]; then
   curl -L https://github.com/getantibody/antibody/releases/download/v6.0.1/antibody_Linux_x86_64.tar.gz | tar -C $HOME/bin -xz antibody
