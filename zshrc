@@ -2,7 +2,7 @@ source ~/.zsh_plugins.sh
 
 stty -ixon
 
-if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
+if [[ -s "$HOME/.nvm/nvm.sh" ]] && [[ -s "$HOME/.nvm/versions/node" ]]; then
   declare -a NODE_GLOBALS=(`find $HOME/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
   NODE_GLOBALS+=("node")
   NODE_GLOBALS+=("nvm")
