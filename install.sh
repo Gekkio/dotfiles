@@ -44,6 +44,11 @@ mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.local/share/nvim/bundle"
 link "$HOME/.config/nvim/init.vim" "$SCRIPT_PATH/vim/vimrc"
 
+# ideavim
+
+mkdir -p "$HOME/.config/ideavim"
+link "$HOME/.config/ideavim/ideavimrc" "$SCRIPT_PATH/ideavimrc"
+
 # xmonad
 
 mkdir -p "$HOME/.xmonad"
