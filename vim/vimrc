@@ -27,6 +27,8 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 " Snippets
 Plug 'honza/vim-snippets'
 "
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"
 Plug 'junegunn/goyo.vim'
 "
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
