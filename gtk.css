@@ -1,3 +1,6 @@
 terminal-window > decoration {
+  border: 0;
+  box-shadow: none;
+  outline: none;
   padding: 0;
 }
