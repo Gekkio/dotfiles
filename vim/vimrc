@@ -39,7 +39,7 @@ Plug 'junegunn/vim-easy-align'
 " Typescript support
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 "
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': ['tex', 'bib'] }
 "
 Plug 'mhinz/vim-signify'
 " Tmux integration
@@ -177,6 +177,8 @@ noremap <silent> <F2> :NERDTreeToggle<CR>
 
 let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
 let g:tmuxify_global_maps = 1
+
+let g:tex_flavor = 'latex'
 
 " === UltiSnips plugin settings ===
 "
