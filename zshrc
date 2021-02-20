@@ -1,4 +1,11 @@
-source ~/.zsh_plugins.sh
+source ~/.cache/znap/zsh-snap/znap.zsh
+
+znap prompt sindresorhus/pure
+
+znap source zsh-users/zsh-completions
+znap source zsh-users/zsh-autosuggestions
+znap source mafredri/zsh-async
+znap source ohmyzsh/ohmyzsh lib/{cli,git,theme-and-appearance}
 
 stty -ixon
 

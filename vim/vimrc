@@ -54,8 +54,6 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " Automatically add closing delimiter (e.g. '' or <>)
 Plug 'Raimondi/delimitMate'
-"
-Plug 'reasonml-editor/vim-reason-plus', { 'for': 'reason' }
 " Rust editing support
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " File tree explorer
@@ -132,9 +130,8 @@ if executable('rust-analyzer')
   let g:LanguageClient_serverCommands.rust = ['rust-analyzer']
 endif
 
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+if executable('typescript-language-server')
+  let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
 endif
 
 if executable('reason-language-server.exe')
@@ -155,6 +152,16 @@ endif
 
 if executable('clangd')
   let g:LanguageClient_serverCommands.cpp = ['clangd']
+endif
+
+if executable('vhdl_ls')
+  let g:LanguageClient_serverCommands.vhdl = ['vhdl_ls']
+endif
+
+if has('nvim') && filereadable($HOME.'/.config/nvim/settings.json')
+  let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
+else
+  let g:LanguageClient_settingsPath = $HOME.'/.vim/settings.json'
 endif
 
 " === Key mappings ===
@@ -205,6 +212,8 @@ elseif executable('ag')
   let g:ctrlp_user_command = 'ag -g "" -l --nocolor %s'
 endif
 
+let g:ctrlp_working_path_mode = '0'
+
 " === Colorscheme settings ===
 "
 set background=dark
@@ -216,12 +225,12 @@ if &t_Co == 256
       autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=#2a2a2a ctermbg=235
       autocmd VimEnter,ColorScheme * :hi IndentGuidesEven guibg=#3a3a3a ctermbg=236
     endif
-  catch E185
+  catch /E185/
   endtry
 else
   try
     colorscheme wombat
-  catch E185
+  catch /E185/
   endtry
 endif
 
