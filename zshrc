@@ -5,7 +5,7 @@ znap prompt sindresorhus/pure
 znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source mafredri/zsh-async
-znap source ohmyzsh/ohmyzsh lib/{cli,git,theme-and-appearance}
+znap source ohmyzsh/ohmyzsh lib/{cli,completion,git,history,key-bindings,theme-and-appearance}
 
 stty -ixon
 
