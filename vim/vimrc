@@ -14,55 +14,53 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-"
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 " Unified tmux/vim navigation
 Plug 'christoomey/vim-tmux-navigator'
 " Wombat color theme
 Plug 'cschlueter/vim-wombat'
 " Fuzzy file searcher. Useful for finding and opening files quickly
 Plug 'ctrlpvim/ctrlp.vim'
-"
+" Support for Terraform files
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
-" Snippets
-Plug 'honza/vim-snippets'
+" Snippets engine
+Plug 'hrsh7th/vim-vsnip'
+" Tmux integration
+Plug 'jebaum/vim-tmuxify'
 "
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"
+" Distraction-free writing in Vim
 Plug 'junegunn/goyo.vim'
-"
+" Git commit browser
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-"
+" Hyperfocus-writing in Vim
 Plug 'junegunn/limelight.vim'
 " Text alignment
 Plug 'junegunn/vim-easy-align'
 " Typescript support
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-"
-Plug 'lervag/vimtex', { 'for': ['tex', 'bib'] }
-"
-Plug 'mhinz/vim-signify'
-" Tmux integration
-Plug 'mhinz/vim-tmuxify'
-"
-Plug 'murarth/ketos', { 'rtp': 'etc/vim/' }
-" Display indentation visually with colors
-Plug 'nathanaelkane/vim-indent-guides'
+" TeX/LaTeX
+if has('nvim-0.4.3') || has('patch-8.0.1453')
+  Plug 'lervag/vimtex', { 'for': ['tex', 'bib'] }
+else
+  Plug 'lervag/vimtex', { 'for': ['tex', 'bib'], 'branch': 'v1.0' }
+endif
+" Show version control status in sign column
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 " Improved Javascript editing (e.g. indentation)
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 " Markdown editing support
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-" Automatically add closing delimiter (e.g. '' or <>)
-Plug 'Raimondi/delimitMate'
+" File tree explorer
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+" Snippets
+Plug 'rafamadriz/friendly-snippets'
 " Rust editing support
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-" File tree explorer
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Snippet engine
-Plug 'SirVer/ultisnips'
-" Needed for some other plugins
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-"
+" OpenGL Shading Language syntax highlighting
 Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 " Comment out code easily
 Plug 'tomtom/tcomment_vim'
@@ -91,15 +89,35 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'zainin/vim-mikrotik', { 'for': 'rsc' }
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
 endif
-let g:deoplete#enable_at_startup = 1
 
 call plug#end()
+
+" === Colorscheme settings ===
+"
+if (has("termguicolors"))
+  set termguicolors
+endif
+if &t_Co == 256
+  try
+    colorscheme wombat256
+  catch /E185/
+  endtry
+else
+  try
+    colorscheme wombat
+  catch /E185/
+  endtry
+endif
 
 " Blink screen instead of beeping
 set visualbell
@@ -109,6 +127,12 @@ set wildignore+=.svn,.git,*.o,*.jar,*.class,node_modules
 set nobackup
 " Enable mouse support
 set mouse=a
+" Allow hidden buffers
+set hidden
+
+set completeopt=menu,menuone,noselect
+
+autocmd FileType rust setlocal colorcolumn=100
 
 " === Indentation ===
 "
@@ -118,50 +142,112 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
-autocmd FileType rust setlocal colorcolumn=100
+" === vimtex plugin ===
 
-let g:LanguageClient_serverCommands = {}
+let g:tex_flavor = 'latex'
 
-if executable('rls')
-  let g:LanguageClient_serverCommands.rust = ['rls']
+" === vim-tmuxify plugin ===
+
+let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
+let g:tmuxify_global_maps = 1
+
+" === ctrlp plugin ===
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
 endif
 
-if executable('rust-analyzer')
-  let g:LanguageClient_serverCommands.rust = ['rust-analyzer']
-endif
+let g:ctrlp_working_path_mode = '0'
 
-if executable('typescript-language-server')
-  let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
-endif
+" === neovim LSP ===
 
-if executable('reason-language-server.exe')
-  let g:LanguageClient_serverCommands.reason = ['reason-language-server.exe']
-endif
+if has('nvim')
+lua << EOF
 
-if executable('pyls')
-  let g:LanguageClient_serverCommands.python = ['pyls']
-endif
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
+configs['vhdl_ls'] = {
+  default_config = {
+    cmd = { 'vhdl_ls' },
+    filetypes = { 'vhdl' },
+    root_dir = util.root_pattern('vhdl_ls.toml', '.git', vim.fn.getcwd()),
+  },
+}
+configs['pyls'] = {
+  default_config = {
+    cmd = { 'pyls' },
+    filetypes = { 'python' },
+    root_dir = util.root_pattern('.git', vim.fn.getcwd()),
+  },
+}
 
-if executable('bingo')
-  let g:LanguageClient_serverCommands.go = ['bingo']
-endif
+local nvim_lsp = require 'lspconfig'
 
-if executable('hie-wrapper')
-  let g:LanguageClient_serverCommands.haskell = ['hie-wrapper']
-endif
+local cmp = require'cmp'
+local types = require'cmp.types'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable,
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({
+      select = true
+    }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'buffer' },
+  },
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      function(entry1, entry2)
+        local kind1 = entry1:get_kind()
+        local kind2 = entry2:get_kind()
+        if kind1 ~= kind2 then
+          if kind1 == types.lsp.CompletionItemKind.Snippet then
+            return false
+          end
+          if kind2 == types.lsp.CompletionItemKind.Snippet then
+            return true
+          end
+        end
+      end,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
+  }
+})
 
-if executable('clangd')
-  let g:LanguageClient_serverCommands.cpp = ['clangd']
-endif
+nvim_lsp.rust_analyzer.setup({
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+})
+nvim_lsp.vhdl_ls.setup({
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+})
+nvim_lsp.pyls.setup({
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+})
 
-if executable('vhdl_ls')
-  let g:LanguageClient_serverCommands.vhdl = ['vhdl_ls']
-endif
-
-if has('nvim') && filereadable($HOME.'/.config/nvim/settings.json')
-  let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
-else
-  let g:LanguageClient_settingsPath = $HOME.'/.vim/settings.json'
+EOF
 endif
 
 " === Key mappings ===
@@ -179,71 +265,30 @@ nmap Ä }
 let mapleader=","
 let maplocalleader=","
 
-" Mappings for NERD tree plugin
-noremap <silent> <F2> :NERDTreeToggle<CR>
+nnoremap <silent> <unique> <c-]>      <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <unique> K          <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <unique> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <unique> <c-k>      <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <unique> 1gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <unique> gr         <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <unique> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> <unique> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> <unique> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <unique> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <unique> ff         <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <unique> <Leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
-let g:tmuxify_custom_command = 'tmux split-window -d -p 20'
-let g:tmuxify_global_maps = 1
-
-let g:tex_flavor = 'latex'
-
-" === UltiSnips plugin settings ===
-"
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" === Indent Guides plugin settings ===
-"
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level=2
-
-let omni_sql_no_default_maps=1
-
-" === CtrlP plugin settings ===
-
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ag')
-  let g:ctrlp_user_command = 'ag -g "" -l --nocolor %s'
-endif
-
-let g:ctrlp_working_path_mode = '0'
-
-" === Colorscheme settings ===
-"
-set background=dark
-if &t_Co == 256
-  try
-    colorscheme wombat256
-    if !has("gui_running")
-      let g:indent_guides_auto_colors = 0
-      autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=#2a2a2a ctermbg=235
-      autocmd VimEnter,ColorScheme * :hi IndentGuidesEven guibg=#3a3a3a ctermbg=236
-    endif
-  catch /E185/
-  endtry
-else
-  try
-    colorscheme wombat
-  catch /E185/
-  endtry
-endif
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> <unique> <F2> :NERDTreeToggle<CR>
 
 nnoremap <silent> <unique> <Leader>gy :Goyo<CR>
 
-nnoremap <silent> <unique> <Leader>al :Limelight!!<CR>
+nnoremap <silent> <unique> <Leader>ll :Limelight!!<CR>
+xmap <silent> <unique> <Leader>ll <Plug>(Limelight)
 
-" === EasyAlign ===
-"
 nmap <unique> <Leader>a <Plug>(EasyAlign)
 xmap <unique> <Leader>a <Plug>(EasyAlign)
+
+" === Local configuration
 
 if has('nvim')
   if filereadable($HOME.'/.config/nvim/init.vim.local')
