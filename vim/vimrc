@@ -166,24 +166,16 @@ let g:ctrlp_working_path_mode = '0'
 if has('nvim')
 lua << EOF
 
-local configs = require 'lspconfig/configs'
-local util = require 'lspconfig/util'
-configs['vhdl_ls'] = {
+local lspconfig = require 'lspconfig'
+local configs = require('lspconfig.configs')
+
+configs.vhdl_ls = {
   default_config = {
     cmd = { 'vhdl_ls' },
     filetypes = { 'vhdl' },
-    root_dir = util.root_pattern('vhdl_ls.toml', '.git', vim.fn.getcwd()),
+    root_dir = lspconfig.util.root_pattern('vhdl_ls.toml', '.git', vim.fn.getcwd()),
   },
 }
-configs['pyls'] = {
-  default_config = {
-    cmd = { 'pyls' },
-    filetypes = { 'python' },
-    root_dir = util.root_pattern('.git', vim.fn.getcwd()),
-  },
-}
-
-local nvim_lsp = require 'lspconfig'
 
 local cmp = require'cmp'
 local types = require'cmp.types'
@@ -237,13 +229,13 @@ cmp.setup({
   }
 })
 
-nvim_lsp.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup({
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 })
-nvim_lsp.vhdl_ls.setup({
+lspconfig.vhdl_ls.setup({
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 })
-nvim_lsp.pyls.setup({
+lspconfig.pylsp.setup({
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 })
 
