@@ -9,13 +9,13 @@ znap source ohmyzsh/ohmyzsh lib/{cli,completion,git,history,key-bindings,theme-a
 
 stty -ixon
 
-if [[ -s "$HOME/.nvm/nvm.sh" ]] && [[ -s "$HOME/.nvm/versions/node" ]]; then
-  declare -a NODE_GLOBALS=(`find $HOME/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+if [[ -s "$HOME/.config/nvm/nvm.sh" ]] && [[ -s "$HOME/.config/nvm/versions/node" ]]; then
+  declare -a NODE_GLOBALS=(`find $HOME/.config/nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
   NODE_GLOBALS+=("node")
   NODE_GLOBALS+=("nvm")
 
   for cmd in "${NODE_GLOBALS[@]}"; do
-    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; source $HOME/.nvm/nvm.sh; ${cmd} \$@ }"
+    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; source $HOME/.config/nvm/nvm.sh; ${cmd} \$@ }"
   done
 fi
 
