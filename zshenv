@@ -29,6 +29,7 @@ pathdirs=(
   "$HOME/bin/symlinks/android-sdk/tools"
   "$HOME/bin/symlinks/android-sdk/platform-tools"
   "$HOME/bin/symlinks/android-ndk"
+  "$HOME/bin/packages/oss-cad-suite/bin"
   "$HOME/.cargo/bin"
   "$HOME/.local/bin"
   "$HOME/bin"
