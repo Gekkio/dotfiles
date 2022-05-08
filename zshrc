@@ -17,6 +17,8 @@ if [[ -s "$HOME/.config/nvm/nvm.sh" ]] && [[ -s "$HOME/.config/nvm/versions/node
   for cmd in "${NODE_GLOBALS[@]}"; do
     eval "${cmd}(){ unset -f ${NODE_GLOBALS}; source $HOME/.config/nvm/nvm.sh; ${cmd} \$@ }"
   done
+
+  [[ -s "$HOME/.config/nvm/bash_completion" ]] && source "$HOME/.config/nvm/bash_completion"
 fi
 
 [[ -s "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"
