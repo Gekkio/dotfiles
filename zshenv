@@ -1,13 +1,22 @@
 export DEBEMAIL="joonas.javanainen@gmail.com"
 export DEBFULLNAME="Joonas Javanainen"
 
-whence vim &> /dev/null && export EDITOR="vim"; export VISUAL="vim"
+if [[ `whence nvim` ]]; then
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+elif [[ `whence vim` ]]; then
+  export EDITOR="vim"
+  export VISUAL="vim"
+fi
 
 export GPG_TTY=`tty`
 
-if [[ "$COLORTERM" = "gnome-terminal" ]] || [[ ${$(</proc/$PPID/cmdline):t} == gnome-terminal* ]]; then
-  export TERM=xterm-256color
+if (( ${+DISPLAY} )) && [[ `whence zenity` ]]; then
+  export AWS_VAULT_PROMPT=zenity
+else
+  export AWS_VAULT_PROMPT=terminal
 fi
+export AWS_VAULT_BACKEND=pass
 
 if [[ -h "$HOME/bin/symlinks/android-sdk" ]]; then
   export ANDROID_HOME=$HOME/bin/symlinks/android-sdk
@@ -29,6 +38,7 @@ pathdirs=(
   "$HOME/bin/symlinks/android-sdk/tools"
   "$HOME/bin/symlinks/android-sdk/platform-tools"
   "$HOME/bin/symlinks/android-ndk"
+  "$HOME/bin/symlinks/bsc/bin"
   "$HOME/bin/packages/oss-cad-suite/bin"
   "$HOME/.cargo/bin"
   "$HOME/.local/bin"
