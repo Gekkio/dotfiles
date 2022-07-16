@@ -50,6 +50,8 @@ if has('nvim') || has('patch-8.0.902')
 else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
+" Support for Bluespec SystemVerilog
+Plug 'mtikekar/vim-bsv', { 'for': 'bsv' }
 " Improved Javascript editing (e.g. indentation)
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 " Markdown editing support
