@@ -188,17 +188,11 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-y>'] = cmp.config.disable,
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
-    ['<CR>'] = cmp.mapping.confirm({
-      select = true
-    }),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = {
     { name = 'nvim_lsp' },
@@ -231,14 +225,16 @@ cmp.setup({
   }
 })
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 lspconfig.rust_analyzer.setup({
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities = capabilities
 })
 lspconfig.vhdl_ls.setup({
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities = capabilities
 })
 lspconfig.pylsp.setup({
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities = capabilities
 })
 
 EOF
@@ -269,7 +265,7 @@ nnoremap <silent> <unique> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <unique> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <unique> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <unique> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <unique> ff         <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <unique> ff         <cmd>lua vim.lsp.buf.formatting { async = true }<CR>
 nnoremap <silent> <unique> <Leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 nnoremap <silent> <unique> <F2> :NERDTreeToggle<CR>
