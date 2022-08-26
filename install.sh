@@ -38,14 +38,12 @@ link "$HOME/.tmux.conf" "$SCRIPT_PATH/tmux.conf"
 mkdir -p "$HOME/.vim/bundle"
 link "$HOME/.vim/vimrc" "$SCRIPT_PATH/vim/vimrc"
 link "$HOME/.gvimrc" "$SCRIPT_PATH/vim/gvimrc"
-link "$HOME/.vim/settings.json" "$SCRIPT_PATH/vim/settings.json"
 
 # neovim
 
 mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.local/share/nvim/bundle"
 link "$HOME/.config/nvim/init.vim" "$SCRIPT_PATH/vim/vimrc"
-link "$HOME/.config/nvim/settings.json" "$SCRIPT_PATH/vim/settings.json"
 
 # ideavim
 
