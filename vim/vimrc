@@ -278,8 +278,8 @@ nnoremap <silent> <unique> <F2> :NERDTreeToggle<CR>
 
 nnoremap <silent> <unique> <Leader>gy :Goyo<CR>
 
-nnoremap <silent> <unique> <Leader>ll :Limelight!!<CR>
-xmap <silent> <unique> <Leader>ll <Plug>(Limelight)
+nnoremap <silent> <unique> <Leader>lili :Limelight!!<CR>
+xmap <silent> <unique> <Leader>lili <Plug>(Limelight)
 
 nmap <unique> <Leader>a <Plug>(EasyAlign)
 xmap <unique> <Leader>a <Plug>(EasyAlign)
