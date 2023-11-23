@@ -30,7 +30,6 @@ typeset -U path
 
 pathdirs=(
   "$HOME/go/bin"
-  "$HOME/.yarn/bin"
   "$HOME/.cabal/bin"
   "$HOME/.poetry/bin"
   "$HOME/.gem/ruby/2.5.0/bin"

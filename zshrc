@@ -9,23 +9,9 @@ znap source ohmyzsh/ohmyzsh lib/{cli,completion,git,history,key-bindings,theme-a
 
 stty -ixon
 
-if [[ -s "$HOME/.config/nvm/nvm.sh" ]]; then
-  declare -a NODE_GLOBALS=("nvm")
-  if [[ -s "$HOME/.config/nvm/versions/node" ]]; then
-    NODE_GLOBALS+=("node")
-    NODE_GLOBALS+=(`find $HOME/.config/nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
-  fi
-
-  for cmd in "${NODE_GLOBALS[@]}"; do
-    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; source $HOME/.config/nvm/nvm.sh; ${cmd} \$@ }"
-  done
-
-  [[ -s "$HOME/.config/nvm/bash_completion" ]] && source "$HOME/.config/nvm/bash_completion"
-fi
-
 [[ -s "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"
 
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -s "$HOME/.local/share/rtx/bin/rtx" ]] && eval "$(/home/joonas/.local/share/rtx/bin/rtx activate zsh)"
 
 [[ -s "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
