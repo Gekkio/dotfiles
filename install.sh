@@ -50,16 +50,6 @@ link "$HOME/.config/nvim/init.vim" "$SCRIPT_PATH/vim/vimrc"
 mkdir -p "$HOME/.config/ideavim"
 link "$HOME/.config/ideavim/ideavimrc" "$SCRIPT_PATH/ideavimrc"
 
-# xmonad
-
-mkdir -p "$HOME/.xmonad"
-
-link "$HOME/.xmonad/xmonad.hs" "$SCRIPT_PATH/xmonad/xmonad.hs"
-
-# GTK
-
-link "$HOME/.config/gtk-3.0/gtk.css" "$SCRIPT_PATH/gtk.css"
-
 # zsh
 
 link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
