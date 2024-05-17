@@ -11,7 +11,7 @@ stty -ixon
 
 [[ -s "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"
 
-[[ -s "$HOME/.local/share/rtx/bin/rtx" ]] && eval "$(/home/joonas/.local/share/rtx/bin/rtx activate zsh)"
+[[ -s "$HOME/bin/mise" ]] && eval "$(/home/joonas/bin/mise activate zsh)"
 
 [[ -s "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
