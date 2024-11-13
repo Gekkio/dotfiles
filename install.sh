@@ -50,6 +50,9 @@ link "$HOME/.config/nvim/init.vim" "$SCRIPT_PATH/vim/vimrc"
 mkdir -p "$HOME/.config/ideavim"
 link "$HOME/.config/ideavim/ideavimrc" "$SCRIPT_PATH/ideavimrc"
 
+mkdir -p "$HOME/.config/wireplumber/main.lua.d"
+link "$HOME/.config/wireplumber/main.lua.d/99-disable-ps4-dualshock.lua" "$SCRIPT_PATH/wireplumber/99-disable-ps4-dualshock.lua"
+
 # zsh
 
 link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
