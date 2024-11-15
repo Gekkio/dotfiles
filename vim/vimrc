@@ -229,19 +229,20 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
 end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local servers = {
+  'buck2',
+  'clangd',
+  'pylsp',
+  'rust_analyzer',
+  'vhdl_ls',
+}
 
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach,
-  capabilities = capabilities
-})
-lspconfig.vhdl_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities
-})
-lspconfig.pylsp.setup({
-  on_attach = on_attach,
-  capabilities = capabilities
-})
+for _, server in ipairs(servers) do
+  lspconfig[server].setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+  })
+end
 
 EOF
 endif
