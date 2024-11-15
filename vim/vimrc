@@ -166,14 +166,6 @@ lua << EOF
 local lspconfig = require 'lspconfig'
 local configs = require('lspconfig.configs')
 
-configs.vhdl_ls = {
-  default_config = {
-    cmd = { 'vhdl_ls' },
-    filetypes = { 'vhdl' },
-    root_dir = lspconfig.util.root_pattern('vhdl_ls.toml', '.git', vim.fn.getcwd()),
-  },
-}
-
 local cmp = require'cmp'
 local types = require'cmp.types'
 cmp.setup({
