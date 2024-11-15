@@ -38,6 +38,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 " Typescript support
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'kaarmu/typst.vim'
 " Show version control status in sign column
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
