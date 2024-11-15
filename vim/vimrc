@@ -130,6 +130,7 @@ set hidden
 set completeopt=menu,menuone,noselect
 
 autocmd FileType rust setlocal colorcolumn=100
+autocmd FileType bsv setlocal commentstring=//\ %s
 
 " === Indentation ===
 "
