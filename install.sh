@@ -57,6 +57,7 @@ link "$HOME/.config/wireplumber/main.lua.d/99-disable-ps4-dualshock.lua" "$SCRIP
 
 link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
 link "$HOME/.zshrc" "$SCRIPT_PATH/zshrc"
+link "$HOME/.zlogin" "$SCRIPT_PATH/zlogin"
 
 mkdir -p $HOME/.cache/znap
 if [ ! -e "$HOME/.cache/znap/zsh-snap" ]; then
