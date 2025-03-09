@@ -15,10 +15,29 @@ end
 
 set -x GPG_TTY (tty)
 
+set -u fish_greeting
+
 if command -q mise
     mise activate fish | source
-    if status --is-login
+end
+
+if status --is-login
+    mkdir -p ~/.config/fish/completions
+
+    if command -q mise
         mise completion fish > ~/.config/fish/completions/mise.fish
+    end
+    if command -q rg
+        rg --generate=complete-fish > ~/.config/fish/completions/rg.fish
+    end
+    if command -q jj
+        COMPLETE=fish jj > ~/.config/fish/completions/jj.fish
+    end
+    if command -q just
+        just --completions fish > ~/.config/fish/completions/just.fish
+    end
+    if command -q zola
+        zola completion fish > ~/.config/fish/completions/zola.fish
     end
 end
 
