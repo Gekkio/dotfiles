@@ -1,18 +1,16 @@
-if status --is-login
-    set -x DEBFULLNAME "Joonas Javanainen"
-    if test (whoami) = "merujoonas"
-        set -x DEBEMAIL "joonas@merulogic.com"
-    else
-        set -x DEBEMAIL "joonas.javanainen@gmail.com"
-    end
+set -x DEBFULLNAME "Joonas Javanainen"
+if test (whoami) = "merujoonas"
+    set -x DEBEMAIL "joonas@merulogic.com"
+else
+    set -x DEBEMAIL "joonas.javanainen@gmail.com"
+end
 
-    if command -q nvim
-        set -x EDITOR "nvim"
-        set -x VISUAL "nvim"
-    else if command -q vim
-        set -x EDITOR "vim"
-        set -x VISUAL "vim"
-    end
+if command -q nvim
+    set -x EDITOR "nvim"
+    set -x VISUAL "nvim"
+else if command -q vim
+    set -x EDITOR "vim"
+    set -x VISUAL "vim"
 end
 
 set -x GPG_TTY (tty)
