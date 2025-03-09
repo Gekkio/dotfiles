@@ -53,13 +53,7 @@ link "$HOME/.config/ideavim/ideavimrc" "$SCRIPT_PATH/ideavimrc"
 mkdir -p "$HOME/.config/wireplumber/main.lua.d"
 link "$HOME/.config/wireplumber/main.lua.d/99-disable-ps4-dualshock.lua" "$SCRIPT_PATH/wireplumber/99-disable-ps4-dualshock.lua"
 
-# zsh
+# fish
 
-link "$HOME/.zshenv" "$SCRIPT_PATH/zshenv"
-link "$HOME/.zshrc" "$SCRIPT_PATH/zshrc"
-link "$HOME/.zlogin" "$SCRIPT_PATH/zlogin"
-
-mkdir -p $HOME/.cache/znap
-if [ ! -e "$HOME/.cache/znap/zsh-snap" ]; then
-  git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git "$HOME/.cache/znap/zsh-snap"
-fi
+mkdir -p "$HOME/.config/fish"
+link "$HOME/.config/fish/config.fish" "$SCRIPT_PATH/config.fish"
