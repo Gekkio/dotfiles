@@ -21,6 +21,10 @@ if command -q mise
     mise activate fish | source
 end
 
+if command -q starship
+    starship init fish | source
+end
+
 if status --is-login
     mkdir -p ~/.config/fish/completions
 

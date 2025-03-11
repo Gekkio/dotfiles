@@ -57,3 +57,5 @@ link "$HOME/.config/wireplumber/main.lua.d/99-disable-ps4-dualshock.lua" "$SCRIP
 
 mkdir -p "$HOME/.config/fish"
 link "$HOME/.config/fish/config.fish" "$SCRIPT_PATH/config.fish"
+
+link "$HOME/.config/starship.toml" "$SCRIPT_PATH/starship.toml"
