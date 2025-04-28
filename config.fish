@@ -59,3 +59,7 @@ for pathdir in $pathdirs
         fish_add_path $pathdir
     end
 end
+
+if test -f "$HOME/.config/fish/config.local.fish"
+    source "$HOME/.config/fish/config.local.fish"
+end
