@@ -60,6 +60,10 @@ for pathdir in $pathdirs
     end
 end
 
+if test -d "$HOME/bin/packages/android-sdk"
+    set -x ANDROID_HOME "$HOME/bin/packages/android-sdk"
+end
+
 if test -f "$HOME/.config/fish/config.local.fish"
     source "$HOME/.config/fish/config.local.fish"
 end
