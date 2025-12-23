@@ -164,9 +164,6 @@ let g:ctrlp_working_path_mode = '0'
 if has('nvim')
 lua << EOF
 
-local lspconfig = require 'lspconfig'
-local configs = require('lspconfig.configs')
-
 local cmp = require'cmp'
 local types = require'cmp.types'
 cmp.setup({
@@ -213,37 +210,37 @@ cmp.setup({
   }
 })
 
-local on_attach = function(client, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '1gD', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'g0', vim.lsp.buf.document_symbol, bufopts)
-  vim.keymap.set('n', 'gW', vim.lsp.buf.workspace_symbol, bufopts)
-  vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'ff', function() vim.lsp.buf.format { async = true } end, bufopts)
-  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
-end
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '1gD', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', 'g0', vim.lsp.buf.document_symbol, bufopts)
+    vim.keymap.set('n', 'gW', vim.lsp.buf.workspace_symbol, bufopts)
+    vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'ff', function() vim.lsp.buf.format { async = true } end, bufopts)
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
+  end,
+})
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local servers = {
-  'buck2',
-  'clangd',
-  'pylsp',
-  'rust_analyzer',
-  'vhdl_ls',
-}
 
-for _, server in ipairs(servers) do
-  lspconfig[server].setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-  })
-end
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
+
+vim.lsp.enable('buck2')
+vim.lsp.enable('clangd')
+vim.lsp.enable('pylsp')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('vhdl_ls')
 
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
     local default_diagnostic_handler = vim.lsp.handlers[method]
