@@ -46,7 +46,10 @@ if status --is-login
 end
 
 set -l pathdirs \
+    ~/bin/packages/android-sdk/emulator \
+    ~/bin/packages/android-sdk/platform-tools \
     ~/bin/packages/oss-cad-suite/bin \
+    ~/bin/symlinks/android-build-tools \
     ~/bin/symlinks/bsc/bin \
     ~/.cabal/bin \
     ~/.cargo/bin \
