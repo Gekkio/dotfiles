@@ -110,6 +110,11 @@ link "$HOME/.config/fish/config.fish" "$SCRIPT_PATH/config.fish"
 
 link "$HOME/.config/starship.toml" "$SCRIPT_PATH/starship.toml"
 
+# git
+
+mkdir -p "$HOME/.config/git"
+link "$HOME/.config/git/ignore" "$SCRIPT_PATH/git/ignore"
+
 # mise
 
 mkdir -p "$HOME/.config/mise/conf.d"

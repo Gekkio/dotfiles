@@ -1,0 +1,4 @@
+*~
+*.swp
+.jj/
+.claude/settings.local.json
