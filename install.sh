@@ -3,7 +3,7 @@ set -e
 
 require_programs() {
   while [ "${1}" ]; do
-    if [ ! `which "${1}"` ]; then
+    if ! command -v "${1}" > /dev/null 2>&1; then
       echo "${1}" must be installed!
       exit 1
     fi
