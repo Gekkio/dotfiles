@@ -22,8 +22,6 @@ Plug 'cschlueter/vim-wombat'
 Plug 'ctrlpvim/ctrlp.vim'
 " Support for Terraform files
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
-" Snippets engine
-Plug 'hrsh7th/vim-vsnip'
 " Tmux integration
 Plug 'jebaum/vim-tmuxify'
 "
