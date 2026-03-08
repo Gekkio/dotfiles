@@ -11,9 +11,59 @@ require_programs() {
   done
 }
 
-require_programs realpath readlink git
+require_programs realpath readlink git curl
 
 SCRIPT_PATH=$(dirname $(realpath -s $0))
+
+# Adds an apt repository if not already present.
+# Usage: add_apt_repo <keyring_path> <keyring_url> <sources_file> <sources_content>
+add_apt_repo() {
+  KEYRING_PATH="$1"
+  KEYRING_URL="$2"
+  SOURCES_FILE="$3"
+  SOURCES_CONTENT="$4"
+
+  if [ ! -f "$SOURCES_FILE" ]; then
+    echo "Adding apt repository $SOURCES_FILE"
+    echo "  Fetching keyring from $KEYRING_URL -> $KEYRING_PATH"
+    sudo install -dm 755 "$(dirname "$KEYRING_PATH")"
+    curl -fSs "$KEYRING_URL" | sudo tee "$KEYRING_PATH" > /dev/null
+    echo "  Writing $SOURCES_FILE"
+    echo "$SOURCES_CONTENT" | sudo tee "$SOURCES_FILE" > /dev/null
+    REPOS_ADDED=1
+  fi
+}
+
+# Adds a PPA if not already present.
+# Usage: add_ppa <ppa>  (e.g. fish-shell/release-4)
+add_ppa() {
+  PPA="$1"
+  if ! grep -qr "$PPA" /etc/apt/sources.list.d/ 2>/dev/null; then
+    echo "Adding PPA $PPA"
+    sudo add-apt-repository -y "ppa:$PPA"
+    REPOS_ADDED=1
+  fi
+}
+
+# mise
+add_apt_repo \
+  /etc/apt/keyrings/mise-archive-keyring.asc \
+  https://mise.jdx.dev/gpg-key.pub \
+  /etc/apt/sources.list.d/mise.sources \
+  "Types: deb
+URIs: https://mise.jdx.dev/deb
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/mise-archive-keyring.asc"
+
+# fish
+add_ppa fish-shell/release-4
+
+if [ -n "$REPOS_ADDED" ]; then
+  sudo apt update -y
+  sudo apt install -y mise fish
+fi
 
 link() {
   TO=`realpath -s "$1"`
