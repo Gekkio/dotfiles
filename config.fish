@@ -25,24 +25,25 @@ if command -q starship
     starship init fish | source
 end
 
+function _update_completion -a cmd
+    set -l completion_file ~/.config/fish/completions/$cmd.fish
+    if not command -q $cmd
+        return
+    end
+    if test -f $completion_file; and not test (command -v $cmd) -nt $completion_file
+        return
+    end
+    $argv[2..] > $completion_file
+end
+
 if status --is-login
     mkdir -p ~/.config/fish/completions
 
-    if command -q mise
-        mise completion fish > ~/.config/fish/completions/mise.fish
-    end
-    if command -q rg
-        rg --generate=complete-fish > ~/.config/fish/completions/rg.fish
-    end
-    if command -q jj
-        COMPLETE=fish jj > ~/.config/fish/completions/jj.fish
-    end
-    if command -q just
-        just --completions fish > ~/.config/fish/completions/just.fish
-    end
-    if command -q zola
-        zola completion fish > ~/.config/fish/completions/zola.fish
-    end
+    _update_completion mise mise completion fish
+    _update_completion rg rg --generate=complete-fish
+    _update_completion jj env COMPLETE=fish jj
+    _update_completion just just --completions fish
+    _update_completion zola zola completion fish
 end
 
 set -l pathdirs \
