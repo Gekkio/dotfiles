@@ -24,7 +24,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 " Tmux integration
 Plug 'jebaum/vim-tmuxify'
-"
+" Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Distraction-free writing in Vim
 Plug 'junegunn/goyo.vim'
@@ -69,7 +69,7 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-sensible'
 " Figures out and sets indentation settings automatically
 Plug 'tpope/vim-sleuth'
-"
+" Mappings for surrounding text with quotes, brackets, tags, etc
 Plug 'tpope/vim-surround'
 " Fairly intuitive key mappings for operation pairs
 " (previous/next, up/down, etc)
@@ -78,7 +78,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 " Very useful plugin for doing quick notes
 Plug 'vimoutliner/vimoutliner', { 'for': 'votl' }
-"
+" Show git status flags in NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 "
 Plug 'zainin/vim-mikrotik', { 'for': 'rsc' }
