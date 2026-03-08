@@ -20,7 +20,7 @@ link() {
   FROM=`realpath -s "$2"`
 
   if [ ! -h "$TO" ] || [ `readlink "$TO"` != "$FROM" ]; then
-    if [ -h "$STO" ] || [ -e "$TO" ]; then
+    if [ -h "$TO" ] || [ -e "$TO" ]; then
       echo Cannot link "$TO"
     else
       echo Linking "$TO"
