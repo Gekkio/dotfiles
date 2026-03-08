@@ -114,3 +114,16 @@ link "$HOME/.config/starship.toml" "$SCRIPT_PATH/starship.toml"
 
 mkdir -p "$HOME/.config/mise/conf.d"
 link "$HOME/.config/mise/conf.d/base.toml" "$SCRIPT_PATH/mise/conf.d/base.toml"
+
+mise install
+
+# jj
+
+if [ "$(whoami)" = "merujoonas" ]; then
+  JJ_EMAIL="joonas@merulogic.com"
+else
+  JJ_EMAIL="joonas.javanainen@gmail.com"
+fi
+
+jj config set --user user.name "Joonas Javanainen"
+jj config set --user user.email "$JJ_EMAIL"
