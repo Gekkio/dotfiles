@@ -1,0 +1,12 @@
+[tools]
+usage = "latest"
+starship = "latest"
+ripgrep = "latest"
+just = "latest"
+jj = "latest"
+mold = "latest"
+cargo-binstall = "latest"
+"cargo:cargo-edit" = "latest"
+"cargo:cargo-outdated" = "latest"
+"cargo:cargo-sweep" = "latest"
+"cargo:tokei" = "latest"

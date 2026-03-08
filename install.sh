@@ -109,3 +109,8 @@ mkdir -p "$HOME/.config/fish"
 link "$HOME/.config/fish/config.fish" "$SCRIPT_PATH/config.fish"
 
 link "$HOME/.config/starship.toml" "$SCRIPT_PATH/starship.toml"
+
+# mise
+
+mkdir -p "$HOME/.config/mise/conf.d"
+link "$HOME/.config/mise/conf.d/base.toml" "$SCRIPT_PATH/mise/conf.d/base.toml"
